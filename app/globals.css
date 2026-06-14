@@ -1,32 +1,32 @@
 :root {
-  --accent: #ff5c35;
-  --accent-soft: rgba(255, 92, 53, 0.12);
-  --accent-line: rgba(255, 92, 53, 0.35);
-  --bg: #fbfaf7;
+  --accent: #4f46e5;
+  --accent-soft: rgba(79, 70, 229, 0.10);
+  --accent-line: rgba(79, 70, 229, 0.32);
+  --bg: #f8f8fd;
   --surface: #ffffff;
-  --surface-alt: #f4f2ec;
-  --ink: #14110e;
-  --ink-soft: #4a4540;
-  --ink-faint: #6e675d;
-  --border: #e4e0d6;
-  --border-strong: #d2cdc0;
-  --shadow: 0 1px 2px rgba(20, 17, 14, 0.04), 0 8px 28px rgba(20, 17, 14, 0.06);
+  --surface-alt: #eeeefb;
+  --ink: #1a1730;
+  --ink-soft: #474264;
+  --ink-faint: #6b6688;
+  --border: #e5e3f3;
+  --border-strong: #cdcae6;
+  --shadow: 0 1px 2px rgba(26, 23, 48, 0.04), 0 8px 28px rgba(26, 23, 48, 0.07);
   --max: 1240px;
   --content: 720px;
 }
 html[data-theme="dark"] {
-  --accent: #ff7a57;
-  --accent-soft: rgba(255, 122, 87, 0.16);
-  --accent-line: rgba(255, 122, 87, 0.4);
-  --bg: #0e0d0c;
-  --surface: #181614;
-  --surface-alt: #201d1a;
-  --ink: #f3f0ea;
-  --ink-soft: #c3bdb3;
-  --ink-faint: #8a847a;
-  --border: #2b2824;
-  --border-strong: #3a3631;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 36px rgba(0, 0, 0, 0.45);
+  --accent: #a5a0fb;
+  --accent-soft: rgba(165, 160, 251, 0.16);
+  --accent-line: rgba(165, 160, 251, 0.4);
+  --bg: #0d0b1a;
+  --surface: #171430;
+  --surface-alt: #1f1b3d;
+  --ink: #ecebfb;
+  --ink-soft: #c0bce0;
+  --ink-faint: #8c87b3;
+  --border: #2a2550;
+  --border-strong: #3a3470;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 36px rgba(0, 0, 0, 0.5);
 }
 
 * { box-sizing: border-box; }
@@ -261,7 +261,7 @@ td .prov { color: var(--ink); font-weight: 600; }
 .bar-label .name { color: var(--ink); font-weight: 500; }
 .bar-label .val { font-family: var(--font-mono), monospace; font-weight: 600; color: var(--ink-soft); }
 .bar-track { position: relative; height: 12px; background: var(--surface-alt); border-radius: 6px; overflow: hidden; }
-.bar-fill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 6px; width: 0; transition: width 1s cubic-bezier(.2,.7,.2,1); background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #ffb199)); }
+.bar-fill { position: absolute; left: 0; top: 0; height: 100%; border-radius: 6px; width: 0; transition: width 1s cubic-bezier(.2,.7,.2,1); background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #c7d2fe)); }
 .bar-row.best .bar-fill { background: linear-gradient(90deg, #1f9d55, #43c478); }
 .bar-row.best .name::after { content: " ✦"; color: #1f9d55; }
 html[data-theme="dark"] .bar-row.best .bar-fill { background: linear-gradient(90deg, #2bb96a, #54d488); }

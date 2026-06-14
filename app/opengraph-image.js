@@ -21,9 +21,9 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#fbfaf7",
+          backgroundColor: "#f8f8fd",
           padding: "64px 72px",
-          borderTop: "14px solid #ff5c35",
+          borderTop: "14px solid #4f46e5",
           fontFamily: "sans-serif",
         }}
       >
@@ -33,7 +33,7 @@ export default function Image() {
               display: "flex",
               fontSize: 24,
               letterSpacing: 2,
-              color: "#ff5c35",
+              color: "#4f46e5",
               textTransform: "uppercase",
               fontWeight: 600,
             }}
@@ -45,7 +45,7 @@ export default function Image() {
               display: "flex",
               fontSize: 68,
               fontWeight: 700,
-              color: "#14110e",
+              color: "#1a1730",
               lineHeight: 1.05,
               marginTop: 18,
               maxWidth: 900,
@@ -57,7 +57,7 @@ export default function Image() {
             style={{
               display: "flex",
               fontSize: 30,
-              color: "#4a4540",
+              color: "#474264",
               marginTop: 20,
               maxWidth: 880,
             }}
@@ -78,8 +78,8 @@ export default function Image() {
                   width: 44,
                   height: 44,
                   borderRadius: 10,
-                  backgroundColor: p.rank === "1" ? "#1f9d55" : "#ece8df",
-                  color: p.rank === "1" ? "#fff" : "#14110e",
+                  backgroundColor: p.rank === "1" ? "#1f9d55" : "#eeeefb",
+                  color: p.rank === "1" ? "#fff" : "#1a1730",
                   alignItems: "center",
                   justifyContent: "center",
                   fontWeight: 700,
@@ -88,14 +88,14 @@ export default function Image() {
               >
                 {p.rank}
               </div>
-              <div style={{ display: "flex", color: "#14110e", fontWeight: 600 }}>
+              <div style={{ display: "flex", color: "#1a1730", fontWeight: 600 }}>
                 {p.name}
               </div>
               <div
                 style={{
                   display: "flex",
                   marginLeft: "auto",
-                  color: "#14110e",
+                  color: "#1a1730",
                   fontWeight: 700,
                 }}
               >
@@ -111,7 +111,7 @@ export default function Image() {
             alignItems: "center",
             fontSize: 28,
             fontWeight: 600,
-            color: "#14110e",
+            color: "#1a1730",
           }}
         >
           <div
@@ -120,7 +120,7 @@ export default function Image() {
               width: 16,
               height: 16,
               borderRadius: 4,
-              backgroundColor: "#ff5c35",
+              backgroundColor: "#4f46e5",
               marginRight: 14,
             }}
           />
