@@ -1,0 +1,52 @@
+import { Inter, Newsreader, IBM_Plex_Mono } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-newsreader",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
+const FAVICON =
+  "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='4'%20y1='36'%20x2='36'%20y2='4'%20gradientUnits='userSpaceOnUse'%3E%3Cstop%20offset='0'%20stop-color='%23ff5c35'/%3E%3Cstop%20offset='.5'%20stop-color='%23e0457f'/%3E%3Cstop%20offset='1'%20stop-color='%235b53e0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20x='1.5'%20y='1.5'%20width='37'%20height='37'%20rx='11'%20fill='url(%23g)'/%3E%3Cg%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%20fill='none'%3E%3Cpath%20d='M8%2026C14%2018%2018%2018%2021%2022S28%2027%2032%2021'%20opacity='.55'/%3E%3Cpath%20d='M8%2021C14%2013%2018%2013%2021%2017S28%2022%2032%2016'%20opacity='.9'/%3E%3Cpath%20d='M8%2016C14%209%2018%209%2021%2013S28%2017%2032%2012'%20opacity='.4'/%3E%3C/g%3E%3C/svg%3E";
+
+export const metadata = {
+  title:
+    "Best Speech-to-Text Models and AI agent APIs in 2026: by Aurora Reviews",
+  description:
+    "An independent benchmark review of the 2026 English speech-to-text landscape, based on FLEURS WER measurements from Speko Benchmarks.",
+  icons: { icon: FAVICON },
+};
+
+// Set the theme before paint to avoid a flash of the wrong color scheme.
+const themeInit = `(function(){try{var t=localStorage.getItem('stt-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`;
+
+export default function RootLayout({ children }) {
+  return (
+    <html
+      lang="en"
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${inter.variable} ${newsreader.variable} ${mono.variable}`}
+    >
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        {children}
+      </body>
+    </html>
+  );
+}
