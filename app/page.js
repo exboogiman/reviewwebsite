@@ -118,7 +118,7 @@ export default function Page() {
 
       <header className="topbar">
         <div className="topbar-inner">
-          <div className="brand">
+          <a href="/" className="brand" aria-label="Aurora Reviews — home">
             <svg
               className="logo"
               viewBox="0 0 40 40"
@@ -150,8 +150,16 @@ export default function Page() {
             </svg>
             <span className="label">Aurora&nbsp;Reviews</span>
             <span className="tag">STT Benchmark</span>
-          </div>
+          </a>
           <div className="topbar-actions">
+            <a
+              className="btn btn-primary topbar-cta"
+              href="https://benchmarks.speko.ai"
+              target="_blank"
+              rel="noopener"
+            >
+              View live benchmarks
+            </a>
             <button
               className="theme-toggle"
               id="themeToggle"
@@ -266,6 +274,24 @@ export default function Page() {
                   safer architectural choice.
                 </li>
               </ul>
+              <div className="cta-row">
+                <a
+                  className="btn btn-primary"
+                  href="https://benchmarks.speko.ai"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  See the live STT leaderboard →
+                </a>
+                <a
+                  className="btn btn-secondary"
+                  href="https://speko.ai"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Try Speko
+                </a>
+              </div>
             </div>
 
             <section id="overview">
@@ -679,6 +705,33 @@ export default function Page() {
                 best STT available — combined with the fastest full-turn response —
                 today and as the market evolves.
               </p>
+              <div className="cta-card">
+                <h3>Want the best STT for every call, automatically?</h3>
+                <p>
+                  Speko continuously benchmarks every major provider and routes
+                  each request to the current best performer — lowest WER per
+                  language, fastest full-turn latency, no code changes.
+                </p>
+                <div className="cta-row">
+                  <a
+                    className="btn btn-primary"
+                    href="https://speko.ai"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Try Speko free →
+                  </a>
+                  <a
+                    className="btn btn-secondary"
+                    href="https://benchmarks.speko.ai"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Explore the benchmarks
+                  </a>
+                </div>
+              </div>
+
               <div className="endmark">
                 <span aria-hidden="true" />
               </div>
@@ -691,6 +744,13 @@ export default function Page() {
         <div className="footer-inner">
           <p className="src" style={{ color: "var(--ink)", marginBottom: "14px" }}>
             Aurora Reviews — independent STT &amp; voice-AI benchmark analysis.
+          </p>
+          <p className="src" style={{ marginBottom: "14px" }}>
+            <strong>How we stay independent:</strong> rankings are derived solely
+            from measured Word Error Rate and latency on public datasets. Aurora
+            Reviews accepts no payment for placement or ratings. Methodology is
+            published on this page and re-run monthly; last updated{" "}
+            {UPDATED_LABEL}.
           </p>
           <p className="src">
             Full-turn latency comparison based on published figures from Vapi,
