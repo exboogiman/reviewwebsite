@@ -34,7 +34,7 @@ const DESCRIPTION =
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   verification: {
-    google: "google30d65614aafe7d83"
+    google: "LREZqZq3AHhGFya2MIlk4Zy3Y71r5WhR0Wc3cnVhrlo"
   },
   title: TITLE,
   description: DESCRIPTION,
