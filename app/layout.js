@@ -1,6 +1,7 @@
 import { Inter, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
+
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -32,6 +33,9 @@ const DESCRIPTION =
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: {
+    google: "google30d65614aafe7d83"
+  },
   title: TITLE,
   description: DESCRIPTION,
   keywords: [
