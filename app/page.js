@@ -50,7 +50,7 @@ const JSON_LD = {
       "@type": "TechArticle",
       "@id": `${SITE_URL}/#article`,
       headline:
-        "The State of Speech-to-Text in 2026: Best STT APIs Ranked by Word Error Rate",
+        "The Best Speech-to-Text APIs in 2026, Ranked by Word Error Rate",
       description:
         "Independent 2026 benchmark of speech-to-text providers ranked by FLEURS Word Error Rate (WER) and full conversational-turn latency.",
       datePublished: PUBLISHED,
@@ -152,13 +152,8 @@ export default function Page() {
             <span className="tag">STT Benchmark</span>
           </a>
           <div className="topbar-actions">
-            <a
-              className="btn btn-primary topbar-cta"
-              href="https://benchmarks.speko.ai"
-              target="_blank"
-              rel="noopener"
-            >
-              View live benchmarks
+            <a className="btn btn-primary topbar-cta" href="#leaderboard">
+              View the leaderboard
             </a>
             <button
               className="theme-toggle"
@@ -234,13 +229,10 @@ export default function Page() {
           <main>
             <div className="hero">
               <span className="kicker">Independent Benchmark Review</span>
-              <h1>The State of Speech-to-Text in 2026</h1>
+              <h1>The Best Speech-to-Text APIs in 2026</h1>
               <p className="sub">
-                Based on publicly available WER measurements from Speko Benchmarks (
-                <a href="https://benchmarks.speko.ai" target="_blank" rel="noopener">
-                  benchmarks.speko.ai
-                </a>
-                ) and FLEURS evaluation data.
+                Based on publicly available Word Error Rate (WER) measurements on
+                the FLEURS evaluation dataset.
               </p>
               <div className="byline">
                 <span><span className="k">By</span> Aurora Reviews</span>
@@ -275,13 +267,8 @@ export default function Page() {
                 </li>
               </ul>
               <div className="cta-row">
-                <a
-                  className="btn btn-primary"
-                  href="https://benchmarks.speko.ai"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  See the live STT leaderboard →
+                <a className="btn btn-primary" href="#leaderboard">
+                  See the STT leaderboard ↓
                 </a>
                 <a
                   className="btn btn-secondary"
@@ -458,13 +445,10 @@ export default function Page() {
                   reported as median (p50). Lower is better.
                 </li>
                 <li>
-                  <strong>Source:</strong> WER results are drawn from{" "}
-                  <a href="https://benchmarks.speko.ai" target="_blank" rel="noopener">
-                    Speko Benchmarks
-                  </a>
-                  , which runs continuous evaluations rather than point-in-time
-                  snapshots. Latency figures are compiled from published provider
-                  documentation.
+                  <strong>Source:</strong> WER results are drawn from a
+                  continuously updated FLEURS benchmark suite rather than
+                  point-in-time snapshots. Latency figures are compiled from
+                  published provider documentation.
                 </li>
                 <li>
                   <strong>Cadence:</strong> providers are re-benchmarked monthly;
@@ -721,13 +705,8 @@ export default function Page() {
                   >
                     Try Speko free →
                   </a>
-                  <a
-                    className="btn btn-secondary"
-                    href="https://benchmarks.speko.ai"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Explore the benchmarks
+                  <a className="btn btn-secondary" href="#leaderboard">
+                    See the full leaderboard
                   </a>
                 </div>
               </div>

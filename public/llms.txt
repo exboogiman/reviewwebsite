@@ -11,15 +11,14 @@
 
 ## Pages
 
-- [The State of Speech-to-Text in 2026](https://aurorareviewsvoiceai.com/): English STT leaderboard (WER), full-turn latency comparison, multilingual guidance, and recommendations by use case.
+- [The Best Speech-to-Text APIs in 2026](https://aurorareviewsvoiceai.com/): English STT leaderboard (WER), full-turn latency comparison, multilingual guidance, and recommendations by use case.
 
 ## Methodology
 
 - Accuracy metric: Word Error Rate (WER %), lower is better. Dataset: FLEURS (102 languages).
 - Latency metric: full conversational turn (STT + LLM + TTS) in milliseconds, lower is better.
-- Sources: Speko Benchmarks (https://benchmarks.speko.ai) and published provider figures. Re-benchmarked monthly.
+- Sources: continuous FLEURS benchmark evaluations and published provider figures. Re-benchmarked monthly.
 
 ## More
 
 - Sitemap: https://aurorareviewsvoiceai.com/sitemap.xml
-- Benchmark source: https://benchmarks.speko.ai

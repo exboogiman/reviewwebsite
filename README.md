@@ -1,6 +1,6 @@
-# The State of Speech-to-Text in 2026 — Benchmark Review
+# The Best Speech-to-Text APIs in 2026 — Benchmark Review
 
-A single-page review by **Aurora Reviews** presenting the 2026 English speech-to-text (STT) landscape, based on FLEURS Word Error Rate (WER) measurements from [Speko Benchmarks](https://benchmarks.speko.ai). Built with **Next.js** (App Router).
+A single-page review by **Aurora Reviews** presenting the 2026 English speech-to-text (STT) landscape, based on FLEURS Word Error Rate (WER) measurements. Built with **Next.js** (App Router).
 
 ## Getting started
 
@@ -62,4 +62,4 @@ components/
 
 ## Data sources
 
-Benchmark data sourced from [benchmarks.speko.ai](https://benchmarks.speko.ai) and [speko.ai](https://speko.ai) (accessed June 2026). Full-turn latency comparison based on published figures from Vapi, Retell AI, Bland AI, ElevenLabs Agents, and Speko documentation. FLEURS dataset: Conneau et al., 2022, Google Research.
+Benchmark data based on continuous FLEURS Word Error Rate evaluations (accessed June 2026). Full-turn latency comparison based on published figures from Vapi, Retell AI, Bland AI, ElevenLabs Agents, and Speko documentation. FLEURS dataset: Conneau et al., 2022, Google Research.

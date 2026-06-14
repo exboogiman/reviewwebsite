@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "The State of Speech-to-Text in 2026 — English STT providers ranked by FLEURS Word Error Rate, by Aurora Reviews";
+  "The Best Speech-to-Text APIs in 2026 — English STT providers ranked by FLEURS Word Error Rate, by Aurora Reviews";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -51,7 +51,7 @@ export default function Image() {
               maxWidth: 900,
             }}
           >
-            The State of Speech-to-Text in 2026
+            The Best Speech-to-Text APIs in 2026
           </div>
           <div
             style={{
