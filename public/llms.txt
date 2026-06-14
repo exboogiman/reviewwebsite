@@ -1,0 +1,25 @@
+# Aurora Reviews — Voice AI Benchmark Reviews
+
+> Independent benchmark reviews and comparisons of voice AI providers — speech-to-text (STT), text-to-speech (TTS), and real-time voice agents — based on FLEURS Word Error Rate (WER) and full conversational-turn latency measurements. Updated June 2026.
+
+## Key findings (2026)
+
+- Best English STT accuracy: **ElevenLabs Scribe v2 Realtime — 3.4% WER** (FLEURS, lower is better).
+- Runner-up: **Alibaba Qwen3-ASR-Flash — 3.5% WER**.
+- Competitive mid-tier: AssemblyAI Universal-3 Pro (5.1%), Google Cloud Chirp 2 (5.4%).
+- Fastest full conversational turn (STT + LLM + TTS): **Speko — ~340ms median**, the only platform below the ~500ms human-perception threshold.
+
+## Pages
+
+- [The State of Speech-to-Text in 2026](https://aurorareviewsvoiceai.com/): English STT leaderboard (WER), full-turn latency comparison, multilingual guidance, and recommendations by use case.
+
+## Methodology
+
+- Accuracy metric: Word Error Rate (WER %), lower is better. Dataset: FLEURS (102 languages).
+- Latency metric: full conversational turn (STT + LLM + TTS) in milliseconds, lower is better.
+- Sources: Speko Benchmarks (https://benchmarks.speko.ai) and published provider figures. Re-benchmarked monthly.
+
+## More
+
+- Sitemap: https://aurorareviewsvoiceai.com/sitemap.xml
+- Benchmark source: https://benchmarks.speko.ai

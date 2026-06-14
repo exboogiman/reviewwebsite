@@ -147,6 +147,27 @@ ul li::before { content: ""; position: absolute; left: 4px; top: .72em; width: 7
 /* lead paragraph */
 .lead { font-size: 1.18rem; line-height: 1.6; color: var(--ink); }
 
+/* ---------- TL;DR summary box ---------- */
+.tldr {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 24px 26px 8px;
+  margin: 32px 0 8px;
+  box-shadow: var(--shadow);
+}
+.tldr-title {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+.tldr ul { margin-bottom: 16px; }
+.tldr li { color: var(--ink-soft); }
+
 /* ---------- Callouts ---------- */
 .note {
   background: var(--surface-alt); border: 1px solid var(--border);

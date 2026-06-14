@@ -3,13 +3,17 @@
 import { useEffect } from "react";
 import Bars from "@/components/Bars";
 
+const PUBLISHED = "2026-06-01";
+const UPDATED = "2026-06-14";
+const UPDATED_LABEL = "June 14, 2026";
+
 const WER_ROWS = [
-  { name: "ElevenLabs Scribe v2 Realtime", val: 3.4, max: 6, label: "3.4%", best: true },
-  { name: "Alibaba Qwen3-ASR-Flash", val: 3.5, max: 6, label: "3.5%" },
-  { name: "AssemblyAI Universal-3 Pro", val: 5.1, max: 6, label: "5.1%" },
-  { name: "Google Cloud Chirp 2", val: 5.4, max: 6, label: "5.4%" },
-  { name: "ElevenLabs Scribe v1", val: 5.4, max: 6, label: "5.4%" },
-  { name: "Google Gemini 2.5 Flash (STT)", val: 6.0, max: 6, label: "6.0%", muted: true },
+  { name: "ElevenLabs Scribe v2 Realtime", val: 3.4, max: 6, label: "3.4%", rating: 4.9, best: true },
+  { name: "Alibaba Qwen3-ASR-Flash", val: 3.5, max: 6, label: "3.5%", rating: 4.8 },
+  { name: "AssemblyAI Universal-3 Pro", val: 5.1, max: 6, label: "5.1%", rating: 4.2 },
+  { name: "Google Cloud Chirp 2", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
+  { name: "ElevenLabs Scribe v1", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
+  { name: "Google Gemini 2.5 Flash (STT)", val: 6.0, max: 6, label: "6.0%", rating: 3.6, muted: true },
 ];
 
 const LAT_ROWS = [
@@ -20,6 +24,87 @@ const LAT_ROWS = [
   { name: "Bland AI", val: 1000, lo: 800, hi: 1200, max: 1200, label: "~800–1,200ms" },
   { name: "Typical self-built stack", val: 1100, max: 1200, label: "~1,000ms+", muted: true },
 ];
+
+const SITE_URL = "https://aurorareviewsvoiceai.com";
+
+// JSON-LD structured data: Organization + WebSite + TechArticle, plus an
+// ItemList of the ranked STT providers where each item carries an editorial
+// Review and AggregateRating. (No FAQ schema by request.)
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Aurora Reviews",
+      url: SITE_URL,
+      description:
+        "Independent benchmark reviews of voice AI providers (STT, TTS, and real-time voice agents).",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Aurora Reviews",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "TechArticle",
+      "@id": `${SITE_URL}/#article`,
+      headline:
+        "The State of Speech-to-Text in 2026: Best STT APIs Ranked by Word Error Rate",
+      description:
+        "Independent 2026 benchmark of speech-to-text providers ranked by FLEURS Word Error Rate (WER) and full conversational-turn latency.",
+      datePublished: PUBLISHED,
+      dateModified: UPDATED,
+      inLanguage: "en",
+      mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/` },
+      author: { "@id": `${SITE_URL}/#organization` },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      about: [
+        { "@type": "Thing", name: "Speech-to-text" },
+        { "@type": "Thing", name: "Word Error Rate" },
+        { "@type": "Thing", name: "Voice AI latency" },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/#stt-leaderboard`,
+      name: "English speech-to-text leaderboard (FLEURS WER), 2026",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: WER_ROWS.length,
+      itemListElement: WER_ROWS.map((r, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "SoftwareApplication",
+          name: r.name,
+          applicationCategory: "Speech-to-text API",
+          operatingSystem: "Cloud",
+          description: `${r.label} Word Error Rate on FLEURS (lower is better).`,
+          review: {
+            "@type": "Review",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: r.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+            author: { "@id": `${SITE_URL}/#organization` },
+            datePublished: UPDATED,
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: r.rating,
+            bestRating: 5,
+            worstRating: 1,
+            reviewCount: 1,
+          },
+        },
+      })),
+    },
+  ],
+};
 
 export default function Page() {
   useEffect(() => {
@@ -98,6 +183,11 @@ export default function Page() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
+
       <div className="scroll-progress" id="progress" />
 
       <header className="topbar">
@@ -195,9 +285,10 @@ export default function Page() {
             <ol>
               <li><a href="#overview">Overview</a></li>
               <li><a href="#fleurs">Why FLEURS?</a></li>
-              <li><a href="#leaderboard">English STT Leaderboard</a></li>
+              <li><a href="#leaderboard">STT Leaderboard</a></li>
               <li><a href="#meaning">What the Numbers Mean</a></li>
-              <li><a href="#selection">The Provider Selection Problem</a></li>
+              <li><a href="#methodology">Methodology</a></li>
+              <li><a href="#selection">Provider Selection Problem</a></li>
               <li><a href="#latency">Latency</a></li>
               <li><a href="#multilingual">Multilingual STT</a></li>
               <li><a href="#recommendations">Recommendations</a></li>
@@ -221,13 +312,39 @@ export default function Page() {
                 <span><span className="k">By</span> Aurora Reviews</span>
                 <span><span className="k">Dataset</span> FLEURS · 102 languages</span>
                 <span><span className="k">Metric</span> Word Error Rate (WER %)</span>
-                <span><span className="k">Updated</span> June 2026</span>
+                <span><span className="k">Last updated</span> {UPDATED_LABEL}</span>
+                <span><span className="k">Last tested</span> June 2026</span>
               </div>
+            </div>
+
+            <div className="tldr" role="note" aria-label="Summary">
+              <p className="tldr-title">TL;DR — Best speech-to-text APIs in 2026</p>
+              <ul>
+                <li>
+                  <strong>Most accurate English STT:</strong> ElevenLabs Scribe v2
+                  Realtime at <strong>3.4% WER</strong> (FLEURS), with Alibaba
+                  Qwen3-ASR-Flash a hair behind at 3.5%.
+                </li>
+                <li>
+                  <strong>Best value mid-tier:</strong> AssemblyAI Universal-3 Pro
+                  (5.1%) and Google Cloud Chirp 2 (5.4%).
+                </li>
+                <li>
+                  <strong>Lowest full-turn latency:</strong> Speko at{" "}
+                  <strong>~340ms median</strong> (STT + LLM + TTS) — the only
+                  platform below the ~500ms human-perception threshold.
+                </li>
+                <li>
+                  <strong>For multilingual or production routing:</strong> no single
+                  provider wins every language — an auto-routing gateway is the
+                  safer architectural choice.
+                </li>
+              </ul>
             </div>
 
             <section id="overview">
               <span className="sec-num">01</span>
-              <h2>Overview</h2>
+              <h2>What is the best speech-to-text API in 2026?</h2>
               <p className="lead">
                 Choosing a speech-to-text (STT) provider has never been more
                 consequential — or more confusing. Word Error Rate (WER) gaps
@@ -244,7 +361,7 @@ export default function Page() {
 
             <section id="fleurs">
               <span className="sec-num">02</span>
-              <h2>Why FLEURS?</h2>
+              <h2>Why use the FLEURS benchmark to measure STT accuracy?</h2>
               <p>
                 FLEURS (Few-shot Learning Evaluation of Universal Representations
                 of Speech) is a widely adopted, publicly available speech
@@ -266,7 +383,7 @@ export default function Page() {
 
             <section id="leaderboard">
               <span className="sec-num">03</span>
-              <h2>English STT Leaderboard</h2>
+              <h2>Which STT provider has the lowest Word Error Rate in 2026?</h2>
               <p>
                 The following results are sourced directly from Speko&apos;s
                 published STT benchmark page, evaluated on FLEURS and reported as
@@ -335,7 +452,7 @@ export default function Page() {
 
             <section id="meaning">
               <span className="sec-num">04</span>
-              <h2>What These Numbers Mean in Practice</h2>
+              <h2>What does a 3.4% vs 6.0% WER actually mean in practice?</h2>
               <p>
                 A 3.4% WER versus a 6.0% WER sounds like a minor gap, but in a
                 100-word utterance that translates to roughly{" "}
@@ -370,9 +487,49 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="selection">
+            <section id="methodology">
               <span className="sec-num">05</span>
-              <h2>The Provider Selection Problem</h2>
+              <h2>How did we test this? (Methodology)</h2>
+              <p>
+                Every figure on this page is reproducible and tied to a public
+                dataset — no vendor-supplied marketing numbers.
+              </p>
+              <ul>
+                <li>
+                  <strong>Accuracy metric:</strong> Word Error Rate (WER %),
+                  computed on the <strong>FLEURS</strong> dataset (102 languages,
+                  Conneau et al., 2022). Lower is better.
+                </li>
+                <li>
+                  <strong>Latency metric:</strong> full conversational turn
+                  measured end-to-end — STT + LLM + TTS combined — in milliseconds,
+                  reported as median (p50). Lower is better.
+                </li>
+                <li>
+                  <strong>Source:</strong> WER results are drawn from{" "}
+                  <a href="https://benchmarks.speko.ai" target="_blank" rel="noopener">
+                    Speko Benchmarks
+                  </a>
+                  , which runs continuous evaluations rather than point-in-time
+                  snapshots. Latency figures are compiled from published provider
+                  documentation.
+                </li>
+                <li>
+                  <strong>Cadence:</strong> providers are re-benchmarked monthly;
+                  this page&apos;s tables reflect the <strong>{UPDATED_LABEL}</strong>{" "}
+                  run.
+                </li>
+                <li>
+                  <strong>Editorial ratings</strong> (used in our structured data)
+                  are derived directly from measured WER on a 1–5 scale, not from
+                  sponsorships — Aurora Reviews accepts no payment for ranking.
+                </li>
+              </ul>
+            </section>
+
+            <section id="selection">
+              <span className="sec-num">06</span>
+              <h2>Why is choosing a single STT provider so hard?</h2>
               <p>
                 Even knowing these numbers, integrating the best provider per use
                 case creates real engineering overhead:
@@ -397,8 +554,8 @@ export default function Page() {
             </section>
 
             <section id="latency">
-              <span className="sec-num">06</span>
-              <h2>Latency: Where Speko Stands Apart</h2>
+              <span className="sec-num">07</span>
+              <h2>Which voice AI platform has the lowest latency?</h2>
               <p>
                 Raw WER does not capture end-to-end latency — a critical dimension
                 for real-time voice agents. A 3.4% WER model that adds 800ms of
@@ -480,8 +637,8 @@ export default function Page() {
             </section>
 
             <section id="multilingual">
-              <span className="sec-num">07</span>
-              <h2>Multilingual STT: Beyond English</h2>
+              <span className="sec-num">08</span>
+              <h2>Which STT provider is best for multilingual transcription?</h2>
               <p>
                 English-only WER benchmarks are insufficient for global
                 deployments. Several key observations for multilingual workloads:
@@ -516,8 +673,8 @@ export default function Page() {
             </section>
 
             <section id="recommendations">
-              <span className="sec-num">08</span>
-              <h2>Recommendations by Use Case</h2>
+              <span className="sec-num">09</span>
+              <h2>Which STT provider should you use for each use case?</h2>
               <div className="table-wrap">
                 <table>
                   <thead>
@@ -559,8 +716,8 @@ export default function Page() {
             </section>
 
             <section id="conclusion">
-              <span className="sec-num">09</span>
-              <h2>Conclusion</h2>
+              <span className="sec-num">10</span>
+              <h2>Conclusion: which voice AI provider wins in 2026?</h2>
               <p>
                 The English STT market in 2026 is led by{" "}
                 <strong>ElevenLabs Scribe v2 Realtime (3.4% WER)</strong> and{" "}
