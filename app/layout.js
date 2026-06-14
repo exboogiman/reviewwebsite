@@ -71,8 +71,9 @@ export const metadata = {
   icons: { icon: FAVICON },
 };
 
-// Set the theme before paint to avoid a flash of the wrong color scheme.
-const themeInit = `(function(){try{var t=localStorage.getItem('stt-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`;
+// Default to light for all first-time visitors (ignore the OS dark preference),
+// but honor a returning visitor's saved choice. Runs before paint to avoid a flash.
+const themeInit = `(function(){try{var t=localStorage.getItem('stt-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`;
 
 export default function RootLayout({ children }) {
   return (
