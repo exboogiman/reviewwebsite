@@ -17,16 +17,17 @@ export const metadata = {
 };
 
 const PUBLISHED = "2026-06-01";
-const UPDATED = "2026-06-14";
-const UPDATED_LABEL = "June 14, 2026";
+const UPDATED = "2026-06-15";
+const UPDATED_LABEL = "June 15, 2026";
 
+// Source: Speko Benchmarks STT leaderboard (FLEURS, read English), last run June 3, 2026.
 const WER_ROWS = [
-  { name: "ElevenLabs Scribe v2 Realtime", val: 3.4, max: 6, label: "3.4%", rating: 4.9, best: true },
-  { name: "Alibaba Qwen3-ASR-Flash", val: 3.5, max: 6, label: "3.5%", rating: 4.8 },
-  { name: "AssemblyAI Universal-3 Pro", val: 5.1, max: 6, label: "5.1%", rating: 4.2 },
-  { name: "Google Cloud Chirp 2", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
-  { name: "ElevenLabs Scribe v1", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
-  { name: "Google Gemini 2.5 Flash (STT)", val: 6.0, max: 6, label: "6.0%", rating: 3.6, muted: true },
+  { name: "OpenAI GPT-4o Transcribe", val: 2.4, max: 14, label: "2.4%", speed: "1.1s", cost: "$0.0060/min", rating: 4.9, best: true },
+  { name: "Alibaba Qwen3-ASR", val: 2.6, max: 14, label: "2.6%", speed: "2.2s", cost: "—", rating: 4.8 },
+  { name: "ElevenLabs Scribe v2", val: 2.9, max: 14, label: "2.9%", speed: "1.4s", cost: "$0.0067/min", rating: 4.7 },
+  { name: "xAI Grok STT", val: 4.8, max: 14, label: "4.8%", speed: "1.0s", cost: "—", rating: 4.1 },
+  { name: "Cartesia Ink-2", val: 6.1, max: 14, label: "6.1%", speed: "1.0s", cost: "$0.0022/min", rating: 3.7 },
+  { name: "Gradium", val: 13.2, max: 14, label: "13.2%", speed: "2.5s", cost: "—", rating: 2.5, muted: true },
 ];
 
 const LAT_ROWS = [
@@ -94,7 +95,17 @@ const JSON_LD = {
           name: r.name,
           applicationCategory: "Speech-to-text API",
           operatingSystem: "Cloud",
-          description: `${r.label} Word Error Rate on FLEURS (lower is better).`,
+          description: `${r.label} Word Error Rate on FLEURS (lower is better); ${r.speed} transcription speed.`,
+          ...(r.cost !== "—"
+            ? {
+                offers: {
+                  "@type": "Offer",
+                  price: r.cost.replace(/[^0-9.]/g, ""),
+                  priceCurrency: "USD",
+                  description: `${r.cost} (per minute of audio)`,
+                },
+              }
+            : {}),
           review: {
             "@type": "Review",
             reviewRating: {
@@ -263,13 +274,15 @@ export default function Page() {
               <p className="tldr-title">TL;DR — Best speech-to-text APIs in 2026</p>
               <ul>
                 <li>
-                  <strong>Most accurate English STT:</strong> ElevenLabs Scribe v2
-                  Realtime at <strong>3.4% WER</strong> (FLEURS), with Alibaba
-                  Qwen3-ASR-Flash a hair behind at 3.5%.
+                  <strong>Most accurate English STT:</strong> OpenAI GPT-4o
+                  Transcribe at <strong>2.4% WER</strong> (FLEURS), with Alibaba
+                  Qwen3-ASR (2.6%) and ElevenLabs Scribe v2 (2.9%) in a
+                  statistical tie right behind it.
                 </li>
                 <li>
-                  <strong>Best value mid-tier:</strong> AssemblyAI Universal-3 Pro
-                  (5.1%) and Google Cloud Chirp 2 (5.4%).
+                  <strong>Cheapest of the accurate options:</strong> Cartesia
+                  Ink-2 at <strong>$0.0022/min</strong> (6.1% WER); OpenAI is the
+                  best accuracy-per-dollar at $0.0060/min.
                 </li>
                 <li>
                   <strong>Lowest full-turn latency:</strong> Speko at{" "}
@@ -341,8 +354,10 @@ export default function Page() {
               <h2>Which STT provider has the lowest Word Error Rate in 2026?</h2>
               <p>
                 The following results are sourced directly from Speko&apos;s
-                published STT benchmark page, evaluated on FLEURS and reported as
-                Word Error Rate (lower is better).
+                published STT benchmark (FLEURS, read English), last run June 3,
+                2026 — reported as Word Error Rate (lower is better), with
+                transcription speed and price per minute. Speko notes the top four
+                are a <strong>statistical tie</strong>.
               </p>
 
               <div className="table-wrap">
@@ -352,45 +367,59 @@ export default function Page() {
                       <th>Rank</th>
                       <th>Provider &amp; Model</th>
                       <th>WER&nbsp;(%)</th>
+                      <th>Speed</th>
+                      <th>Cost</th>
                       <th>Notes</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td className="rank mono">1</td>
-                      <td><span className="prov">ElevenLabs Scribe v2 Realtime</span></td>
-                      <td className="num">3.4%</td>
+                      <td><span className="prov">OpenAI GPT-4o Transcribe</span></td>
+                      <td className="num">2.4%</td>
+                      <td className="num">1.1s</td>
+                      <td className="num">$0.0060/min</td>
                       <td>Current leader <span className="badge">Leader</span></td>
                     </tr>
                     <tr>
                       <td className="rank mono">2</td>
-                      <td><span className="prov">Alibaba Qwen3-ASR-Flash</span></td>
-                      <td className="num">3.5%</td>
-                      <td>Extremely competitive; 0.1% behind</td>
+                      <td><span className="prov">Alibaba Qwen3-ASR</span></td>
+                      <td className="num">2.6%</td>
+                      <td className="num">2.2s</td>
+                      <td className="num">—</td>
+                      <td>Statistical tie for #1</td>
                     </tr>
                     <tr>
                       <td className="rank mono">3</td>
-                      <td><span className="prov">AssemblyAI Universal-3 Pro</span></td>
-                      <td className="num">5.1%</td>
-                      <td>Strong mid-tier option</td>
+                      <td><span className="prov">ElevenLabs Scribe v2</span></td>
+                      <td className="num">2.9%</td>
+                      <td className="num">1.4s</td>
+                      <td className="num">$0.0067/min</td>
+                      <td>Top tier; realtime-capable</td>
                     </tr>
                     <tr>
                       <td className="rank mono">4</td>
-                      <td><span className="prov">Google Cloud Chirp 2</span></td>
-                      <td className="num">5.4%</td>
-                      <td>Tied with ElevenLabs Scribe v1</td>
+                      <td><span className="prov">xAI Grok STT</span></td>
+                      <td className="num">4.8%</td>
+                      <td className="num">1.0s</td>
+                      <td className="num">—</td>
+                      <td>Fastest tier; solid accuracy</td>
                     </tr>
                     <tr>
                       <td className="rank mono">5</td>
-                      <td><span className="prov">ElevenLabs Scribe v1</span></td>
-                      <td className="num">5.4%</td>
-                      <td>Superseded by Scribe v2</td>
+                      <td><span className="prov">Cartesia Ink-2</span></td>
+                      <td className="num">6.1%</td>
+                      <td className="num">1.0s</td>
+                      <td className="num">$0.0022/min</td>
+                      <td>Cheapest per minute</td>
                     </tr>
                     <tr>
                       <td className="rank mono">6</td>
-                      <td><span className="prov">Google Gemini 2.5 Flash (STT)</span></td>
-                      <td className="num">6.0%</td>
-                      <td>Multimodal model; not STT-specialized</td>
+                      <td><span className="prov">Gradium</span></td>
+                      <td className="num">13.2%</td>
+                      <td className="num">2.5s</td>
+                      <td className="num">—</td>
+                      <td>Trails the field on accuracy</td>
                     </tr>
                   </tbody>
                 </table>
@@ -407,38 +436,50 @@ export default function Page() {
 
             <section id="meaning">
               <span className="sec-num">04</span>
-              <h2>What does a 3.4% vs 6.0% WER actually mean in practice?</h2>
+              <h2>What does a 2.4% vs 13.2% WER actually mean in practice?</h2>
               <p>
-                A 3.4% WER versus a 6.0% WER sounds like a minor gap, but in a
-                100-word utterance that translates to roughly{" "}
-                <strong>2.6 extra errors per sentence</strong> — enough to corrupt
-                named entities, numbers, and instructions in a customer-facing
-                voice agent.
+                A 2.4% WER versus a 13.2% WER sounds abstract, but in a 100-word
+                utterance that is roughly <strong>11 extra errors</strong> — enough
+                to corrupt named entities, numbers, and instructions in a
+                customer-facing voice agent. Even the gap from 2.4% to 6.1% is
+                about <strong>3–4 extra mistakes</strong> per 100 words.
               </p>
               <h3>
-                The top tier &nbsp;<span className="num">≤3.5% WER</span>
+                The top tier &nbsp;<span className="num">≤2.9% WER</span>
               </h3>
               <p>
-                ElevenLabs Scribe v2 and Alibaba Qwen3-ASR-Flash are appropriate
-                for high-stakes transcription: legal, medical, financial, or any
-                use case where downstream LLM reasoning depends on clean input
-                text.
+                OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR and ElevenLabs Scribe
+                v2 sit within a statistical tie and are appropriate for high-stakes
+                transcription: legal, medical, financial, or any use case where
+                downstream LLM reasoning depends on clean input text.
               </p>
               <h3>
-                The mid tier &nbsp;<span className="num">5.1%–5.4% WER</span>
+                The mid tier &nbsp;<span className="num">4.8%–6.1% WER</span>
               </h3>
               <p>
-                AssemblyAI Universal-3 Pro and Google Chirp 2 remain solid for
-                general call center, voice search, and content transcription where
-                some post-correction is acceptable.
+                xAI Grok STT and Cartesia Ink-2 remain solid for general call
+                center, voice search, and content transcription where some
+                post-correction is acceptable — and Cartesia is the cheapest option
+                measured, at $0.0022/min. Other established names not in this run
+                (e.g. AssemblyAI Universal-3 Pro, Google Chirp 2) typically land in
+                this same band on English read speech.
               </p>
               <h3>
-                Multimodal-as-STT &nbsp;<span className="num">6.0% WER</span>
+                The accuracy floor &nbsp;<span className="num">13.2% WER</span>
               </h3>
               <p>
-                Gemini 2.5 Flash underperforms purpose-built STT models as
-                expected. Using a general-purpose LLM for transcription trades
-                accuracy for convenience.
+                Gradium trails the field by a wide margin and isn&apos;t suitable
+                where transcript fidelity matters. As a rule, general-purpose or
+                early-stage models (including LLM-as-STT setups like Google Gemini)
+                trade accuracy for convenience.
+              </p>
+              <h3>Head-to-head: OpenAI GPT-4o Transcribe vs ElevenLabs Scribe v2</h3>
+              <p>
+                On raw English accuracy, OpenAI GPT-4o Transcribe (2.4% WER) edges
+                ElevenLabs Scribe v2 (2.9% WER) — a ~0.5-point gap that&apos;s
+                within the statistical-tie band, so for most workloads the deciding
+                factors are latency, price ($0.0060 vs $0.0067/min) and whether you
+                need realtime streaming, where Scribe v2 is purpose-built.
               </p>
             </section>
 
@@ -452,24 +493,32 @@ export default function Page() {
               <ul>
                 <li>
                   <strong>Accuracy metric:</strong> Word Error Rate (WER %),
-                  computed on the <strong>FLEURS</strong> dataset (102 languages,
-                  Conneau et al., 2022). Lower is better.
+                  computed on read English clips from the <strong>FLEURS</strong>
+                  {" "}dataset (Conneau et al., 2022). Lower is better.
                 </li>
                 <li>
-                  <strong>Latency metric:</strong> full conversational turn
-                  measured end-to-end — STT + LLM + TTS combined — in milliseconds,
-                  reported as median (p50). Lower is better.
+                  <strong>Speed:</strong> wall-clock time to transcribe the
+                  benchmark clip (seconds) — a batch-transcription figure, distinct
+                  from the streaming full-turn latency discussed below.
                 </li>
                 <li>
-                  <strong>Source:</strong> WER results are drawn from a
-                  continuously updated FLEURS benchmark suite rather than
-                  point-in-time snapshots. Latency figures are compiled from
-                  published provider documentation.
+                  <strong>Cost:</strong> list price per minute of audio, where the
+                  provider publishes one.
+                </li>
+                <li>
+                  <strong>Full-turn latency metric:</strong> STT + LLM + TTS
+                  combined, end-to-end, in milliseconds, reported as median (p50).
+                </li>
+                <li>
+                  <strong>Source:</strong> WER, speed and cost are drawn from
+                  Speko&apos;s continuously updated benchmark suite (last run June
+                  3, 2026) rather than point-in-time snapshots. Full-turn latency
+                  figures are compiled from published provider documentation.
                 </li>
                 <li>
                   <strong>Cadence:</strong> providers are re-benchmarked monthly;
                   this page&apos;s tables reflect the <strong>{UPDATED_LABEL}</strong>{" "}
-                  run.
+                  update.
                 </li>
                 <li>
                   <strong>Editorial ratings</strong> (used in our structured data)
@@ -638,14 +687,19 @@ export default function Page() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td><span className="prov">Real-time voice agent (English)</span></td>
-                      <td>ElevenLabs Scribe v2 Realtime or auto-routed gateway</td>
-                      <td>Lowest WER + realtime capability</td>
+                      <td><span className="prov">Highest English accuracy</span></td>
+                      <td>OpenAI GPT-4o Transcribe</td>
+                      <td>Lowest measured WER (2.4%) at $0.0060/min</td>
                     </tr>
                     <tr>
-                      <td><span className="prov">Batch transcription (cost-sensitive)</span></td>
-                      <td>Alibaba Qwen3-ASR-Flash</td>
-                      <td>3.5% WER at competitive cost</td>
+                      <td><span className="prov">Real-time voice agent (English)</span></td>
+                      <td>ElevenLabs Scribe v2 or auto-routed gateway</td>
+                      <td>Top-tier WER (2.9%) + realtime streaming</td>
+                    </tr>
+                    <tr>
+                      <td><span className="prov">Cost-sensitive / high volume</span></td>
+                      <td>Cartesia Ink-2</td>
+                      <td>Cheapest measured at $0.0022/min (6.1% WER)</td>
                     </tr>
                     <tr>
                       <td><span className="prov">Multilingual production workloads</span></td>
@@ -657,11 +711,6 @@ export default function Page() {
                       <td>Gateway with BYOK option</td>
                       <td>Avoid provider lock-in from day one</td>
                     </tr>
-                    <tr>
-                      <td><span className="prov">High-accuracy specialized domains</span></td>
-                      <td>Evaluate Universal-3 Pro with custom vocabulary</td>
-                      <td>AssemblyAI&apos;s Custom Vocabulary improves domain WER</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -672,14 +721,15 @@ export default function Page() {
               <h2>Conclusion: which voice AI provider wins in 2026?</h2>
               <p>
                 The English STT market in 2026 is led by{" "}
-                <strong>ElevenLabs Scribe v2 Realtime (3.4% WER)</strong> and{" "}
-                <strong>Alibaba Qwen3-ASR-Flash (3.5% WER)</strong>, with
-                AssemblyAI Universal-3 Pro and Google Chirp 2 forming a competitive
-                second tier around 5.1–5.4% WER. For most production applications,
-                the marginal accuracy difference between rank 1 and rank 2 is
-                negligible — the more important engineering decision is how to
-                handle multi-language routing, automatic failover, and benchmark
-                freshness over time.
+                <strong>OpenAI GPT-4o Transcribe (2.4% WER)</strong>,{" "}
+                <strong>Alibaba Qwen3-ASR (2.6%)</strong> and{" "}
+                <strong>ElevenLabs Scribe v2 (2.9%)</strong> — a top tier so close
+                that Speko calls it a statistical tie, with xAI Grok STT and
+                Cartesia Ink-2 close behind. For most production applications, the
+                accuracy difference across that top tier is negligible — the more
+                important engineering decision is how to handle multi-language
+                routing, automatic failover, latency, and benchmark freshness over
+                time.
               </p>
               <p>
                 That decision has a clear answer in 2026: <strong>Speko</strong>.
@@ -687,7 +737,7 @@ export default function Page() {
                 weaknesses, Speko continuously benchmarks every major STT provider
                 across every supported language and routes each call automatically
                 to the current best performer — no code changes, no credential
-                juggling, no manual re-evaluation every quarter. When ElevenLabs
+                juggling, no manual re-evaluation every quarter. When OpenAI
                 leads, calls go there. When another provider pulls ahead, routing
                 updates silently on Speko&apos;s side.
               </p>

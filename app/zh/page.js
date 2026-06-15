@@ -14,17 +14,17 @@ const HREFLANG = {
 export const metadata = {
   title: "2026 年最佳语音转文字模型与 AI 智能体 API：Aurora Reviews 出品",
   description:
-    "2026 年语音转文字供应商独立基准测评——ElevenLabs、Alibaba Qwen3、AssemblyAI、Google——按 FLEURS 词错误率（WER）和完整回合延迟排名，并附按用例的推荐方案。",
+    "2026 年语音转文字供应商独立基准测评——OpenAI、Alibaba Qwen3、ElevenLabs、Cartesia、xAI——按 FLEURS 词错误率（WER）、转写速度和每分钟成本排名，并附按用例的推荐方案。",
   keywords: [
     "2026 年最佳语音转文字 API",
     "最低延迟语音 AI 平台",
     "实时语音转文字 API 对比",
     "语音 AI 网关平台",
     "最适合多语言应用的 STT API",
-    "ElevenLabs Scribe v2 与 AssemblyAI Universal-3 Pro 对比",
+    "OpenAI GPT-4o Transcribe 与 ElevenLabs Scribe v2 对比",
     "Vapi 与 Retell AI 与 Bland AI 延迟对比",
-    "Google Chirp 2 词错误率",
-    "Alibaba Qwen3-ASR-Flash 评测",
+    "Cartesia Ink-2 STT 价格",
+    "Alibaba Qwen3-ASR 评测",
     "如何搭建低延迟语音机器人技术栈",
     "自建语音 AI 技术栈的替代方案",
   ],
@@ -41,16 +41,17 @@ export const metadata = {
 };
 
 const PUBLISHED = "2026-06-01";
-const UPDATED = "2026-06-14";
-const UPDATED_LABEL = "2026年6月14日";
+const UPDATED = "2026-06-15";
+const UPDATED_LABEL = "2026年6月15日";
 
+// Source: Speko Benchmarks STT leaderboard (FLEURS, read English), last run June 3, 2026.
 const WER_ROWS = [
-  { name: "ElevenLabs Scribe v2 Realtime", val: 3.4, max: 6, label: "3.4%", rating: 4.9, best: true },
-  { name: "Alibaba Qwen3-ASR-Flash", val: 3.5, max: 6, label: "3.5%", rating: 4.8 },
-  { name: "AssemblyAI Universal-3 Pro", val: 5.1, max: 6, label: "5.1%", rating: 4.2 },
-  { name: "Google Cloud Chirp 2", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
-  { name: "ElevenLabs Scribe v1", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
-  { name: "Google Gemini 2.5 Flash (STT)", val: 6.0, max: 6, label: "6.0%", rating: 3.6, muted: true },
+  { name: "OpenAI GPT-4o Transcribe", val: 2.4, max: 14, label: "2.4%", speed: "1.1s", cost: "$0.0060/min", rating: 4.9, best: true },
+  { name: "Alibaba Qwen3-ASR", val: 2.6, max: 14, label: "2.6%", speed: "2.2s", cost: "—", rating: 4.8 },
+  { name: "ElevenLabs Scribe v2", val: 2.9, max: 14, label: "2.9%", speed: "1.4s", cost: "$0.0067/min", rating: 4.7 },
+  { name: "xAI Grok STT", val: 4.8, max: 14, label: "4.8%", speed: "1.0s", cost: "—", rating: 4.1 },
+  { name: "Cartesia Ink-2", val: 6.1, max: 14, label: "6.1%", speed: "1.0s", cost: "$0.0022/min", rating: 3.7 },
+  { name: "Gradium", val: 13.2, max: 14, label: "13.2%", speed: "2.5s", cost: "—", rating: 2.5, muted: true },
 ];
 
 const LAT_ROWS = [
@@ -118,7 +119,17 @@ const JSON_LD = {
           name: r.name,
           applicationCategory: "Speech-to-text API",
           operatingSystem: "Cloud",
-          description: `${r.label} Word Error Rate on FLEURS (lower is better).`,
+          description: `${r.label} Word Error Rate on FLEURS (lower is better); ${r.speed} transcription speed.`,
+          ...(r.cost !== "—"
+            ? {
+                offers: {
+                  "@type": "Offer",
+                  price: r.cost.replace(/[^0-9.]/g, ""),
+                  priceCurrency: "USD",
+                  description: `${r.cost} (per minute of audio)`,
+                },
+              }
+            : {}),
           review: {
             "@type": "Review",
             reviewRating: {
@@ -288,13 +299,14 @@ export default function Page() {
               <p className="tldr-title">摘要 — 2026 年最佳语音转文字 API</p>
               <ul>
                 <li>
-                  <strong>最准确的英语 STT：</strong>ElevenLabs Scribe v2
-                  Realtime，<strong>3.4% WER</strong>（FLEURS），Alibaba
-                  Qwen3-ASR-Flash 以 3.5% 紧随其后，仅有一线之差。
+                  <strong>最准确的英语 STT：</strong>OpenAI GPT-4o Transcribe，
+                  <strong>2.4% WER</strong>（FLEURS），Alibaba Qwen3-ASR（2.6%）
+                  与 ElevenLabs Scribe v2（2.9%）以统计意义上的并列紧随其后。
                 </li>
                 <li>
-                  <strong>最具性价比的中端选择：</strong>AssemblyAI Universal-3 Pro
-                  （5.1%）与 Google Cloud Chirp 2（5.4%）。
+                  <strong>准确选项中最便宜的：</strong>Cartesia Ink-2，
+                  <strong>$0.0022/min</strong>（6.1% WER）；OpenAI 则在
+                  $0.0060/min 下提供最佳的每美元准确率。
                 </li>
                 <li>
                   <strong>最低的完整对话回合延迟：</strong>Speko，{" "}
@@ -359,8 +371,10 @@ export default function Page() {
               <span className="sec-num">03</span>
               <h2>2026 年哪家 STT 供应商的词错误率最低？</h2>
               <p>
-                以下结果直接来自 Speko 公开发布的 STT 基准测试页面，在 FLEURS
-                上评测，并以词错误率（数值越低越好）报告。
+                以下结果直接来自 Speko 公开发布的 STT 基准测试（FLEURS，朗读
+                英语），最近一次运行于 2026 年 6 月 3 日——以词错误率（数值越低
+                越好）报告，并附转写速度和每分钟价格。Speko 指出前四名为
+                <strong>统计意义上的并列</strong>。
               </p>
 
               <div className="table-wrap">
@@ -370,45 +384,59 @@ export default function Page() {
                       <th>排名</th>
                       <th>供应商与模型</th>
                       <th>WER&nbsp;(%)</th>
+                      <th>速度</th>
+                      <th>成本</th>
                       <th>备注</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td className="rank mono">1</td>
-                      <td><span className="prov">ElevenLabs Scribe v2 Realtime</span></td>
-                      <td className="num">3.4%</td>
+                      <td><span className="prov">OpenAI GPT-4o Transcribe</span></td>
+                      <td className="num">2.4%</td>
+                      <td className="num">1.1s</td>
+                      <td className="num">$0.0060/min</td>
                       <td>当前领先者 <span className="badge">领先</span></td>
                     </tr>
                     <tr>
                       <td className="rank mono">2</td>
-                      <td><span className="prov">Alibaba Qwen3-ASR-Flash</span></td>
-                      <td className="num">3.5%</td>
-                      <td>极具竞争力；仅落后 0.1%</td>
+                      <td><span className="prov">Alibaba Qwen3-ASR</span></td>
+                      <td className="num">2.6%</td>
+                      <td className="num">2.2s</td>
+                      <td className="num">—</td>
+                      <td>与第 1 名统计意义上并列</td>
                     </tr>
                     <tr>
                       <td className="rank mono">3</td>
-                      <td><span className="prov">AssemblyAI Universal-3 Pro</span></td>
-                      <td className="num">5.1%</td>
-                      <td>出色的中端选择</td>
+                      <td><span className="prov">ElevenLabs Scribe v2</span></td>
+                      <td className="num">2.9%</td>
+                      <td className="num">1.4s</td>
+                      <td className="num">$0.0067/min</td>
+                      <td>顶级梯队；支持实时</td>
                     </tr>
                     <tr>
                       <td className="rank mono">4</td>
-                      <td><span className="prov">Google Cloud Chirp 2</span></td>
-                      <td className="num">5.4%</td>
-                      <td>与 ElevenLabs Scribe v1 持平</td>
+                      <td><span className="prov">xAI Grok STT</span></td>
+                      <td className="num">4.8%</td>
+                      <td className="num">1.0s</td>
+                      <td className="num">—</td>
+                      <td>速度最快梯队；准确率扎实</td>
                     </tr>
                     <tr>
                       <td className="rank mono">5</td>
-                      <td><span className="prov">ElevenLabs Scribe v1</span></td>
-                      <td className="num">5.4%</td>
-                      <td>已被 Scribe v2 取代</td>
+                      <td><span className="prov">Cartesia Ink-2</span></td>
+                      <td className="num">6.1%</td>
+                      <td className="num">1.0s</td>
+                      <td className="num">$0.0022/min</td>
+                      <td>每分钟成本最低</td>
                     </tr>
                     <tr>
                       <td className="rank mono">6</td>
-                      <td><span className="prov">Google Gemini 2.5 Flash (STT)</span></td>
-                      <td className="num">6.0%</td>
-                      <td>多模态模型；并非 STT 专用</td>
+                      <td><span className="prov">Gradium</span></td>
+                      <td className="num">13.2%</td>
+                      <td className="num">2.5s</td>
+                      <td className="num">—</td>
+                      <td>准确率落后于其余各家</td>
                     </tr>
                   </tbody>
                 </table>
@@ -425,39 +453,46 @@ export default function Page() {
 
             <section id="meaning">
               <span className="sec-num">04</span>
-              <h2>3.4% 与 6.0% 的 WER 在实践中究竟意味着什么？</h2>
+              <h2>2.4% 与 13.2% 的 WER 在实践中究竟意味着什么？</h2>
               <p>
-                3.4% 与 6.0% 的 WER 听起来差距不大，但在一段 100 个单词的语句中，
-                这相当于<strong>每句话多出约 2.6 个错误</strong>——足以在面向
-                客户的语音智能体中破坏专有名词、数字和指令。
+                2.4% 与 13.2% 的 WER 听起来很抽象，但在一段 100 个单词的语句中，
+                这大约相当于<strong>多出 11 个错误</strong>——足以在面向客户的
+                语音智能体中破坏专有名词、数字和指令。即便是从 2.4% 到 6.1%
+                的差距，每 100 个单词也约有<strong>多出 3–4 个错误</strong>。
               </p>
               <h3>
-                顶级梯队 &nbsp;<span className="num">≤3.5% WER</span>
+                顶级梯队 &nbsp;<span className="num">≤2.9% WER</span>
               </h3>
               <p>
-                ElevenLabs Scribe v2 与 Alibaba Qwen3-ASR-Flash 适用于高风险
-                转写场景：法律、医疗、金融，或任何下游 LLM 推理依赖于干净输入
-                文本的用例。
+                OpenAI GPT-4o Transcribe、Alibaba Qwen3-ASR 与 ElevenLabs
+                Scribe v2 处于统计意义上的并列，适用于高风险转写场景：法律、
+                医疗、金融，或任何下游 LLM 推理依赖于干净输入文本的用例。
               </p>
               <h3>
-                中端梯队 &nbsp;<span className="num">5.1%–5.4% WER</span>
+                中端梯队 &nbsp;<span className="num">4.8%–6.1% WER</span>
               </h3>
               <p>
-                AssemblyAI Universal-3 Pro 与 Google Chirp 2 在通用呼叫中心、
-                语音搜索以及可接受一定后期校正的内容转写场景中，依然表现稳健。
+                xAI Grok STT 与 Cartesia Ink-2 在通用呼叫中心、语音搜索以及
+                可接受一定后期校正的内容转写场景中，依然表现稳健——而 Cartesia
+                是所测项中最便宜的选择，仅 $0.0022/min。本次未参与运行的其他
+                知名厂商（例如 AssemblyAI Universal-3 Pro、Google Chirp 2），
+                在英语朗读语音上通常也落在这一区间。
               </p>
               <h3>
-                多模态当作 STT &nbsp;<span className="num">6.0% WER</span>
+                准确率底线 &nbsp;<span className="num">13.2% WER</span>
               </h3>
               <p>
-                不出所料，Gemini 2.5 Flash 的表现逊于专门构建的 STT 模型。用
-                通用 LLM 来做转写，是以准确率换取便利。
+                Gradium 大幅落后于其余各家，不适合对转写保真度有要求的场景。
+                一般来说，通用型或处于早期阶段的模型（包括将 LLM 当作 STT 使用
+                的方案，如 Google Gemini）都是以准确率换取便利。
               </p>
+              <h3>正面对决：OpenAI GPT-4o Transcribe vs ElevenLabs Scribe v2</h3>
               <p>
-                正面对决之下，ElevenLabs Scribe v2 Realtime（3.4% WER）在原始
-                英语准确率上明显领先于 AssemblyAI Universal-3 Pro（5.1% WER）
-                ——约 1.7 个百分点的差距，对于实体密集的转写场景至关重要；不过
-                在专业领域中，Universal-3 Pro 的自定义词汇表能够缩小这一差距。
+                在原始英语准确率上，OpenAI GPT-4o Transcribe（2.4% WER）略胜
+                ElevenLabs Scribe v2（2.9% WER）——约 0.5 个百分点的差距，仍
+                落在统计意义上并列的区间内，因此对于大多数负载而言，决定性因素
+                在于延迟、价格（$0.0060 与 $0.0067/min）以及你是否需要实时
+                流式处理——而 Scribe v2 正是为此而生。
               </p>
             </section>
 
@@ -471,18 +506,25 @@ export default function Page() {
               <ul>
                 <li>
                   <strong>准确率指标：</strong>词错误率（WER %），在{" "}
-                  <strong>FLEURS</strong> 数据集（102 种语言，Conneau 等人，
-                  2022）上计算。数值越低越好。
+                  <strong>FLEURS</strong> 数据集（Conneau 等人，2022）的英语
+                  朗读片段上计算。数值越低越好。
                 </li>
                 <li>
-                  <strong>延迟指标：</strong>端到端测量的完整对话回合——STT +
-                  LLM + TTS 之和——以毫秒为单位，以中位数（p50）报告。数值
-                  越低越好。
+                  <strong>速度：</strong>转写基准片段的实测耗时（秒）——这是一项
+                  批量转写指标，与下文讨论的流式完整回合延迟不同。
                 </li>
                 <li>
-                  <strong>数据来源：</strong>WER 结果取自持续更新的 FLEURS
-                  基准测试套件，而非某个时间点的快照。延迟数据则汇编自各供应商
-                  公开发布的文档。
+                  <strong>成本：</strong>每分钟音频的标价，在供应商有公开报价时
+                  给出。
+                </li>
+                <li>
+                  <strong>完整回合延迟指标：</strong>端到端测量的 STT + LLM +
+                  TTS 之和，以毫秒为单位，以中位数（p50）报告。
+                </li>
+                <li>
+                  <strong>数据来源：</strong>WER、速度与成本取自 Speko 持续更新
+                  的基准测试套件（最近一次运行于 2026 年 6 月 3 日），而非某个
+                  时间点的快照。完整回合延迟数据则汇编自各供应商公开发布的文档。
                 </li>
                 <li>
                   <strong>测评节奏：</strong>各供应商每月重新基准测试一次；本页
@@ -648,14 +690,19 @@ export default function Page() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td><span className="prov">实时语音智能体（英语）</span></td>
-                      <td>ElevenLabs Scribe v2 Realtime 或自动路由网关</td>
-                      <td>最低 WER + 实时能力</td>
+                      <td><span className="prov">最高英语准确率</span></td>
+                      <td>OpenAI GPT-4o Transcribe</td>
+                      <td>实测 WER 最低（2.4%），$0.0060/min</td>
                     </tr>
                     <tr>
-                      <td><span className="prov">批量转写（成本敏感）</span></td>
-                      <td>Alibaba Qwen3-ASR-Flash</td>
-                      <td>3.5% WER，成本具竞争力</td>
+                      <td><span className="prov">实时语音智能体（英语）</span></td>
+                      <td>ElevenLabs Scribe v2 或自动路由网关</td>
+                      <td>顶级梯队 WER（2.9%）+ 实时流式</td>
+                    </tr>
+                    <tr>
+                      <td><span className="prov">成本敏感 / 高并发</span></td>
+                      <td>Cartesia Ink-2</td>
+                      <td>实测最便宜，$0.0022/min（6.1% WER）</td>
                     </tr>
                     <tr>
                       <td><span className="prov">多语言生产负载</span></td>
@@ -666,11 +713,6 @@ export default function Page() {
                       <td><span className="prov">原型开发 / 快速集成</span></td>
                       <td>支持 BYOK（自带密钥）的网关</td>
                       <td>从第一天起就避免供应商锁定</td>
-                    </tr>
-                    <tr>
-                      <td><span className="prov">高准确率的专业领域</span></td>
-                      <td>评估配合自定义词汇表的 Universal-3 Pro</td>
-                      <td>AssemblyAI 的自定义词汇表可改善领域 WER</td>
                     </tr>
                   </tbody>
                 </table>
@@ -707,19 +749,20 @@ export default function Page() {
               <h2>结论：2026 年哪家语音 AI 供应商胜出？</h2>
               <p>
                 2026 年的英语 STT 市场由{" "}
-                <strong>ElevenLabs Scribe v2 Realtime（3.4% WER）</strong>与{" "}
-                <strong>Alibaba Qwen3-ASR-Flash（3.5% WER）</strong>领跑，
-                AssemblyAI Universal-3 Pro 与 Google Chirp 2 则构成了 WER 约
-                5.1–5.4% 的有力第二梯队。对于绝大多数生产应用而言，第一名与
-                第二名之间细微的准确率差异可以忽略不计——更重要的工程决策在于，
-                如何处理多语言路由、自动故障转移，以及基准数据随时间的时效性。
+                <strong>OpenAI GPT-4o Transcribe（2.4% WER）</strong>、{" "}
+                <strong>Alibaba Qwen3-ASR（2.6%）</strong>与{" "}
+                <strong>ElevenLabs Scribe v2（2.9%）</strong>领跑——这一顶级
+                梯队差距之小，Speko 称其为统计意义上的并列，xAI Grok STT 与
+                Cartesia Ink-2 紧随其后。对于绝大多数生产应用而言，该顶级梯队
+                内部的准确率差异可以忽略不计——更重要的工程决策在于，如何处理
+                多语言路由、自动故障转移、延迟，以及基准数据随时间的时效性。
               </p>
               <p>
                 这个决策在 2026 年有一个明确答案：<strong>Speko</strong>。
                 Speko 不会硬编码单一供应商并被迫接受其短板，而是在每一种受支持
                 的语言上持续对每家主流 STT 供应商进行基准测试，并将每一次调用
                 自动路由到当前表现最佳者——无需改动代码，无需周旋于多套凭证，
-                也无需每季度手动重新评估。当 ElevenLabs 领先时，调用就发往那里；
+                也无需每季度手动重新评估。当 OpenAI 领先时，调用就发往那里；
                 当另一家供应商反超时，路由会在 Speko 一侧静默更新。
               </p>
               <p>

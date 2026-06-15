@@ -29,7 +29,7 @@ const SITE_URL = "https://aurorareviewsvoiceai.com";
 const TITLE =
   "Best Speech-to-Text Models and AI Agent APIs in 2026: by Aurora Reviews";
 const DESCRIPTION =
-  "Independent 2026 benchmark review of speech-to-text providers — ElevenLabs, Alibaba Qwen3, AssemblyAI, Google — ranked by FLEURS Word Error Rate (WER) and full-turn latency, with recommendations by use case.";
+  "Independent 2026 benchmark review of speech-to-text providers — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI, Cartesia — ranked by FLEURS Word Error Rate (WER), speed, and price per minute, with recommendations by use case.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -43,8 +43,10 @@ export const metadata = {
     "best STT API 2026",
     "Word Error Rate benchmark",
     "FLEURS WER",
+    "OpenAI GPT-4o Transcribe",
     "ElevenLabs Scribe v2",
-    "AssemblyAI Universal-3",
+    "Alibaba Qwen3-ASR",
+    "STT cost per minute",
     "lowest latency voice AI",
     "real-time STT provider",
     "voice AI gateway",

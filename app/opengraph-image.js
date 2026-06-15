@@ -6,9 +6,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const LEADERS = [
-  { rank: "1", name: "ElevenLabs Scribe v2 Realtime", wer: "3.4%" },
-  { rank: "2", name: "Alibaba Qwen3-ASR-Flash", wer: "3.5%" },
-  { rank: "3", name: "AssemblyAI Universal-3 Pro", wer: "5.1%" },
+  { rank: "1", name: "OpenAI GPT-4o Transcribe", wer: "2.4%" },
+  { rank: "2", name: "Alibaba Qwen3-ASR", wer: "2.6%" },
+  { rank: "3", name: "ElevenLabs Scribe v2", wer: "2.9%" },
 ];
 
 export default function Image() {

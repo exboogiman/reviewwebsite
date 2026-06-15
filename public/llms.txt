@@ -2,11 +2,11 @@
 
 > Independent benchmark reviews and comparisons of voice AI providers — speech-to-text (STT), text-to-speech (TTS), and real-time voice agents — based on FLEURS Word Error Rate (WER) and full conversational-turn latency measurements. Updated June 2026.
 
-## Key findings (2026)
+## Key findings (data last run June 3, 2026)
 
-- Best English STT accuracy: **ElevenLabs Scribe v2 Realtime — 3.4% WER** (FLEURS, lower is better).
-- Runner-up: **Alibaba Qwen3-ASR-Flash — 3.5% WER**.
-- Competitive mid-tier: AssemblyAI Universal-3 Pro (5.1%), Google Cloud Chirp 2 (5.4%).
+- Best English STT accuracy: **OpenAI GPT-4o Transcribe — 2.4% WER** (FLEURS, read English, lower is better), $0.0060/min.
+- Statistical tie for the lead: **Alibaba Qwen3-ASR — 2.6% WER** and **ElevenLabs Scribe v2 — 2.9% WER** ($0.0067/min).
+- Next tier: xAI Grok STT (4.8%), Cartesia Ink-2 (6.1%, cheapest at $0.0022/min); Gradium trails at 13.2%.
 - Fastest full conversational turn (STT + LLM + TTS): **Speko — ~340ms median**, the only platform below the ~500ms human-perception threshold.
 
 ## Pages
@@ -15,9 +15,10 @@
 
 ## Methodology
 
-- Accuracy metric: Word Error Rate (WER %), lower is better. Dataset: FLEURS (102 languages).
+- Accuracy metric: Word Error Rate (WER %), lower is better. Dataset: FLEURS (read English clips).
+- Also reported: transcription speed (seconds) and list price per minute, where published.
 - Latency metric: full conversational turn (STT + LLM + TTS) in milliseconds, lower is better.
-- Sources: continuous FLEURS benchmark evaluations and published provider figures. Re-benchmarked monthly.
+- Sources: continuous FLEURS benchmark evaluations (last run June 3, 2026) and published provider figures. Re-benchmarked monthly.
 
 ## More
 

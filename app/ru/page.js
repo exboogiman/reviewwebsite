@@ -15,19 +15,20 @@ export const metadata = {
   title:
     "Лучшие модели и API распознавания речи в 2026 году: обзор Aurora Reviews",
   description:
-    "Независимый обзор-бенчмарк провайдеров распознавания речи в 2026 году — ElevenLabs, Alibaba Qwen3, AssemblyAI, Google — с рейтингом по доле ошибочных слов (WER) на датасете FLEURS и полной задержке диалогового хода, с рекомендациями по сценариям использования.",
+    "Независимый обзор-бенчмарк провайдеров распознавания речи в 2026 году — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI, Cartesia — с рейтингом по доле ошибочных слов (WER) на датасете FLEURS, скорости и цене за минуту, с рекомендациями по сценариям использования.",
   keywords: [
-    "лучший speech-to-text API 2026",
-    "платформа голосового ИИ с наименьшей задержкой",
-    "сравнение API распознавания речи в реальном времени",
-    "платформы-шлюзы голосового ИИ",
-    "лучший STT API для многоязычных приложений",
-    "ElevenLabs Scribe v2 против AssemblyAI Universal-3 Pro",
-    "задержка Vapi против Retell AI против Bland AI",
-    "доля ошибочных слов Google Chirp 2",
-    "обзор Alibaba Qwen3-ASR-Flash",
-    "как собрать стек голосового бота с низкой задержкой",
-    "альтернативы созданию собственного стека голосового ИИ",
+    "сравнение распознавания речи",
+    "лучший STT API 2026",
+    "бенчмарк доли ошибочных слов",
+    "FLEURS WER",
+    "OpenAI GPT-4o Transcribe",
+    "ElevenLabs Scribe v2",
+    "Alibaba Qwen3-ASR",
+    "стоимость STT за минуту",
+    "голосовой ИИ с наименьшей задержкой",
+    "STT-провайдер реального времени",
+    "шлюз голосового ИИ",
+    "бенчмарк Speko",
   ],
   alternates: { canonical: "/ru", languages: HREFLANG },
   openGraph: {
@@ -43,16 +44,16 @@ export const metadata = {
 };
 
 const PUBLISHED = "2026-06-01";
-const UPDATED = "2026-06-14";
-const UPDATED_LABEL = "14 июня 2026";
+const UPDATED = "2026-06-15";
+const UPDATED_LABEL = "15 июня 2026";
 
 const WER_ROWS = [
-  { name: "ElevenLabs Scribe v2 Realtime", val: 3.4, max: 6, label: "3.4%", rating: 4.9, best: true },
-  { name: "Alibaba Qwen3-ASR-Flash", val: 3.5, max: 6, label: "3.5%", rating: 4.8 },
-  { name: "AssemblyAI Universal-3 Pro", val: 5.1, max: 6, label: "5.1%", rating: 4.2 },
-  { name: "Google Cloud Chirp 2", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
-  { name: "ElevenLabs Scribe v1", val: 5.4, max: 6, label: "5.4%", rating: 4.0 },
-  { name: "Google Gemini 2.5 Flash (STT)", val: 6.0, max: 6, label: "6.0%", rating: 3.6, muted: true },
+  { name: "OpenAI GPT-4o Transcribe", val: 2.4, max: 14, label: "2.4%", speed: "1.1s", cost: "$0.0060/min", rating: 4.9, best: true },
+  { name: "Alibaba Qwen3-ASR", val: 2.6, max: 14, label: "2.6%", speed: "2.2s", cost: "—", rating: 4.8 },
+  { name: "ElevenLabs Scribe v2", val: 2.9, max: 14, label: "2.9%", speed: "1.4s", cost: "$0.0067/min", rating: 4.7 },
+  { name: "xAI Grok STT", val: 4.8, max: 14, label: "4.8%", speed: "1.0s", cost: "—", rating: 4.1 },
+  { name: "Cartesia Ink-2", val: 6.1, max: 14, label: "6.1%", speed: "1.0s", cost: "$0.0022/min", rating: 3.7 },
+  { name: "Gradium", val: 13.2, max: 14, label: "13.2%", speed: "2.5s", cost: "—", rating: 2.5, muted: true },
 ];
 
 const LAT_ROWS = [
@@ -120,7 +121,17 @@ const JSON_LD = {
           name: r.name,
           applicationCategory: "Speech-to-text API",
           operatingSystem: "Cloud",
-          description: `Доля ошибочных слов ${r.label} на FLEURS (чем меньше, тем лучше).`,
+          description: `${r.label} Word Error Rate on FLEURS (lower is better); ${r.speed} transcription speed.`,
+          ...(r.cost !== "—"
+            ? {
+                offers: {
+                  "@type": "Offer",
+                  price: r.cost.replace(/[^0-9.]/g, ""),
+                  priceCurrency: "USD",
+                  description: `${r.cost} (per minute of audio)`,
+                },
+              }
+            : {}),
           review: {
             "@type": "Review",
             reviewRating: {
@@ -291,13 +302,15 @@ export default function Page() {
               <p className="tldr-title">Кратко — лучшие API распознавания речи в 2026 году</p>
               <ul>
                 <li>
-                  <strong>Самое точное англоязычное STT:</strong> ElevenLabs Scribe v2
-                  Realtime с <strong>WER 3,4%</strong> (FLEURS), а Alibaba
-                  Qwen3-ASR-Flash отстаёт буквально на волосок — 3,5%.
+                  <strong>Самое точное англоязычное STT:</strong> OpenAI GPT-4o
+                  Transcribe с <strong>WER 2,4%</strong> (FLEURS), а Alibaba
+                  Qwen3-ASR (2,6%) и ElevenLabs Scribe v2 (2,9%) идут следом в
+                  статистически неотличимой группе.
                 </li>
                 <li>
-                  <strong>Лучший средний сегмент по соотношению цены и качества:</strong> AssemblyAI Universal-3 Pro
-                  (5,1%) и Google Cloud Chirp 2 (5,4%).
+                  <strong>Самый дешёвый из точных вариантов:</strong> Cartesia
+                  Ink-2 за <strong>$0.0022/min</strong> (WER 6,1%); OpenAI даёт
+                  лучшее соотношение точности и цены при $0.0060/min.
                 </li>
                 <li>
                   <strong>Наименьшая задержка полного хода диалога:</strong> Speko с{" "}
@@ -368,9 +381,12 @@ export default function Page() {
               <span className="sec-num">03</span>
               <h2>У какого провайдера STT наименьшая доля ошибочных слов в 2026 году?</h2>
               <p>
-                Приведённые ниже результаты взяты напрямую с опубликованной
-                страницы бенчмарка STT компании Speko, оценены на FLEURS и
-                представлены как доля ошибочных слов (чем меньше, тем лучше).
+                Приведённые ниже результаты взяты напрямую из опубликованного
+                бенчмарка STT компании Speko (FLEURS, читаемый английский),
+                последний прогон — 3 июня 2026 года, и представлены как доля
+                ошибочных слов (чем меньше, тем лучше), со скоростью транскрипции
+                и ценой за минуту. Speko отмечает, что четвёрка лидеров
+                образует <strong>статистически неотличимую группу</strong>.
               </p>
 
               <div className="table-wrap">
@@ -380,45 +396,59 @@ export default function Page() {
                       <th>Место</th>
                       <th>Провайдер и модель</th>
                       <th>WER&nbsp;(%)</th>
+                      <th>Скорость</th>
+                      <th>Цена</th>
                       <th>Примечания</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td className="rank mono">1</td>
-                      <td><span className="prov">ElevenLabs Scribe v2 Realtime</span></td>
-                      <td className="num">3.4%</td>
+                      <td><span className="prov">OpenAI GPT-4o Transcribe</span></td>
+                      <td className="num">2.4%</td>
+                      <td className="num">1.1s</td>
+                      <td className="num">$0.0060/min</td>
                       <td>Текущий лидер <span className="badge">Лидер</span></td>
                     </tr>
                     <tr>
                       <td className="rank mono">2</td>
-                      <td><span className="prov">Alibaba Qwen3-ASR-Flash</span></td>
-                      <td className="num">3.5%</td>
-                      <td>Крайне конкурентоспособен; отстаёт на 0,1%</td>
+                      <td><span className="prov">Alibaba Qwen3-ASR</span></td>
+                      <td className="num">2.6%</td>
+                      <td className="num">2.2s</td>
+                      <td className="num">—</td>
+                      <td>Статистически неотличим от первого места</td>
                     </tr>
                     <tr>
                       <td className="rank mono">3</td>
-                      <td><span className="prov">AssemblyAI Universal-3 Pro</span></td>
-                      <td className="num">5.1%</td>
-                      <td>Сильный вариант среднего сегмента</td>
+                      <td><span className="prov">ElevenLabs Scribe v2</span></td>
+                      <td className="num">2.9%</td>
+                      <td className="num">1.4s</td>
+                      <td className="num">$0.0067/min</td>
+                      <td>Верхний сегмент; поддержка реального времени</td>
                     </tr>
                     <tr>
                       <td className="rank mono">4</td>
-                      <td><span className="prov">Google Cloud Chirp 2</span></td>
-                      <td className="num">5.4%</td>
-                      <td>Наравне с ElevenLabs Scribe v1</td>
+                      <td><span className="prov">xAI Grok STT</span></td>
+                      <td className="num">4.8%</td>
+                      <td className="num">1.0s</td>
+                      <td className="num">—</td>
+                      <td>Самый быстрый сегмент; уверенная точность</td>
                     </tr>
                     <tr>
                       <td className="rank mono">5</td>
-                      <td><span className="prov">ElevenLabs Scribe v1</span></td>
-                      <td className="num">5.4%</td>
-                      <td>Заменён моделью Scribe v2</td>
+                      <td><span className="prov">Cartesia Ink-2</span></td>
+                      <td className="num">6.1%</td>
+                      <td className="num">1.0s</td>
+                      <td className="num">$0.0022/min</td>
+                      <td>Самый дешёвый за минуту</td>
                     </tr>
                     <tr>
                       <td className="rank mono">6</td>
-                      <td><span className="prov">Google Gemini 2.5 Flash (STT)</span></td>
-                      <td className="num">6.0%</td>
-                      <td>Мультимодальная модель; не специализирована под STT</td>
+                      <td><span className="prov">Gradium</span></td>
+                      <td className="num">13.2%</td>
+                      <td className="num">2.5s</td>
+                      <td className="num">—</td>
+                      <td>Отстаёт от остальных по точности</td>
                     </tr>
                   </tbody>
                 </table>
@@ -435,46 +465,55 @@ export default function Page() {
 
             <section id="meaning">
               <span className="sec-num">04</span>
-              <h2>Что на практике означает WER 3,4% против 6,0%?</h2>
+              <h2>Что на практике означает WER 2,4% против 13,2%?</h2>
               <p>
-                WER 3,4% против 6,0% звучит как незначительный разрыв, но в
-                высказывании из 100 слов это примерно{" "}
-                <strong>2,6 дополнительной ошибки на предложение</strong> — этого
-                достаточно, чтобы исказить имена собственные, числа и инструкции в
-                голосовом агенте, работающем с клиентами.
+                WER 2,4% против 13,2% звучит абстрактно, но в высказывании из
+                100 слов это примерно <strong>11 дополнительных ошибок</strong> —
+                этого достаточно, чтобы исказить имена собственные, числа и
+                инструкции в голосовом агенте, работающем с клиентами. Даже разрыв
+                от 2,4% до 6,1% — это около{" "}
+                <strong>3–4 дополнительных ошибок</strong> на 100 слов.
               </p>
               <h3>
-                Верхний сегмент &nbsp;<span className="num">WER ≤3,5%</span>
+                Верхний сегмент &nbsp;<span className="num">WER ≤2,9%</span>
               </h3>
               <p>
-                ElevenLabs Scribe v2 и Alibaba Qwen3-ASR-Flash подходят для
+                OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR и ElevenLabs Scribe
+                v2 находятся в статистически неотличимой группе и подходят для
                 ответственной транскрипции: юридической, медицинской, финансовой —
                 и любых сценариев, где последующие рассуждения LLM зависят от
                 чистоты входного текста.
               </p>
               <h3>
-                Средний сегмент &nbsp;<span className="num">WER 5,1%–5,4%</span>
+                Средний сегмент &nbsp;<span className="num">WER 4,8%–6,1%</span>
               </h3>
               <p>
-                AssemblyAI Universal-3 Pro и Google Chirp 2 остаются надёжными для
-                типового колл-центра, голосового поиска и транскрипции контента,
-                где допустима некоторая постобработка.
+                xAI Grok STT и Cartesia Ink-2 остаются надёжными для типового
+                колл-центра, голосового поиска и транскрипции контента, где
+                допустима некоторая постобработка — а Cartesia ещё и самый дешёвый
+                из измеренных вариантов, $0.0022/min. Другие известные имена, не
+                попавшие в этот прогон (например, AssemblyAI Universal-3 Pro,
+                Google Chirp 2), обычно оказываются в этом же диапазоне на читаемой
+                английской речи.
               </p>
               <h3>
-                Мультимодальная модель как STT &nbsp;<span className="num">WER 6,0%</span>
+                Нижняя граница точности &nbsp;<span className="num">WER 13,2%</span>
               </h3>
               <p>
-                Gemini 2.5 Flash ожидаемо уступает специализированным STT-моделям.
-                Использование универсальной LLM для транскрипции — это размен
-                точности на удобство.
+                Gradium отстаёт от остальных с большим отрывом и не подходит там,
+                где важна точность транскрипта. Как правило, универсальные или
+                ранние модели (включая схемы LLM-как-STT, такие как Google Gemini)
+                разменивают точность на удобство.
               </p>
+              <h3>Прямое сравнение: OpenAI GPT-4o Transcribe против ElevenLabs Scribe v2</h3>
               <p>
-                В прямом сравнении ElevenLabs Scribe v2 Realtime (WER 3,4%)
-                уверенно опережает AssemblyAI Universal-3 Pro (WER 5,1%) по
-                «сырой» точности на английском — разрыв примерно в 1,7 пункта,
-                который имеет значение для транскрипции с большим числом имён
-                собственных, хотя пользовательский словарь Universal-3 Pro может
-                сократить его в специализированных доменах.
+                По «сырой» точности на английском OpenAI GPT-4o Transcribe (WER
+                2,4%) немного опережает ElevenLabs Scribe v2 (WER 2,9%) — разрыв
+                примерно в 0,5 пункта, который укладывается в статистически
+                неотличимую группу, поэтому для большинства нагрузок решающими
+                факторами становятся задержка, цена ($0.0060 против $0.0067/min) и
+                то, нужна ли вам потоковая обработка в реальном времени, под
+                которую Scribe v2 создан специально.
               </p>
             </section>
 
@@ -488,23 +527,35 @@ export default function Page() {
               <ul>
                 <li>
                   <strong>Метрика точности:</strong> доля ошибочных слов (WER %),
-                  рассчитанная на датасете <strong>FLEURS</strong> (102 языка,
-                  Conneau et al., 2022). Чем меньше, тем лучше.
+                  рассчитанная на читаемых английских клипах из датасета{" "}
+                  <strong>FLEURS</strong> (Conneau et al., 2022). Чем меньше, тем
+                  лучше.
                 </li>
                 <li>
-                  <strong>Метрика задержки:</strong> полный ход диалога, измеренный
-                  сквозным образом — STT + LLM + TTS вместе — в миллисекундах,
-                  представлен как медиана (p50). Чем меньше, тем лучше.
+                  <strong>Скорость:</strong> фактическое время транскрипции
+                  эталонного клипа (в секундах) — показатель пакетной
+                  транскрипции, отличный от потоковой задержки полного хода,
+                  обсуждаемой ниже.
                 </li>
                 <li>
-                  <strong>Источник:</strong> результаты WER берутся из непрерывно
-                  обновляемого набора бенчмарков FLEURS, а не из разовых срезов.
-                  Данные о задержке скомпилированы из опубликованной документации
-                  провайдеров.
+                  <strong>Стоимость:</strong> прейскурантная цена за минуту аудио,
+                  если провайдер её публикует.
+                </li>
+                <li>
+                  <strong>Метрика задержки полного хода:</strong> STT + LLM + TTS
+                  вместе, сквозным образом, в миллисекундах, представлена как
+                  медиана (p50).
+                </li>
+                <li>
+                  <strong>Источник:</strong> WER, скорость и стоимость берутся из
+                  непрерывно обновляемого набора бенчмарков Speko (последний
+                  прогон — 3 июня 2026 года), а не из разовых срезов. Данные о
+                  задержке полного хода скомпилированы из опубликованной
+                  документации провайдеров.
                 </li>
                 <li>
                   <strong>Периодичность:</strong> провайдеры повторно тестируются
-                  ежемесячно; таблицы на этой странице отражают прогон от{" "}
+                  ежемесячно; таблицы на этой странице отражают обновление от{" "}
                   <strong>{UPDATED_LABEL}</strong>.
                 </li>
                 <li>
@@ -677,14 +728,19 @@ export default function Page() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td><span className="prov">Голосовой агент реального времени (английский)</span></td>
-                      <td>ElevenLabs Scribe v2 Realtime или авто-маршрутизирующий шлюз</td>
-                      <td>Наименьший WER + работа в реальном времени</td>
+                      <td><span className="prov">Наивысшая точность на английском</span></td>
+                      <td>OpenAI GPT-4o Transcribe</td>
+                      <td>Наименьший измеренный WER (2,4%) при $0.0060/min</td>
                     </tr>
                     <tr>
-                      <td><span className="prov">Пакетная транскрипция (чувствительная к стоимости)</span></td>
-                      <td>Alibaba Qwen3-ASR-Flash</td>
-                      <td>WER 3,5% при конкурентной стоимости</td>
+                      <td><span className="prov">Голосовой агент реального времени (английский)</span></td>
+                      <td>ElevenLabs Scribe v2 или авто-маршрутизирующий шлюз</td>
+                      <td>WER верхнего сегмента (2,9%) + потоковая обработка в реальном времени</td>
+                    </tr>
+                    <tr>
+                      <td><span className="prov">Чувствительные к стоимости / большие объёмы</span></td>
+                      <td>Cartesia Ink-2</td>
+                      <td>Самый дешёвый из измеренных — $0.0022/min (WER 6,1%)</td>
                     </tr>
                     <tr>
                       <td><span className="prov">Многоязычные продакшен-нагрузки</span></td>
@@ -695,11 +751,6 @@ export default function Page() {
                       <td><span className="prov">Прототипирование / быстрая интеграция</span></td>
                       <td>Шлюз с опцией BYOK</td>
                       <td>Избегайте привязки к провайдеру с первого дня</td>
-                    </tr>
-                    <tr>
-                      <td><span className="prov">Специализированные домены с высокой точностью</span></td>
-                      <td>Оцените Universal-3 Pro с пользовательским словарём</td>
-                      <td>Пользовательский словарь AssemblyAI улучшает доменный WER</td>
                     </tr>
                   </tbody>
                 </table>
@@ -741,14 +792,16 @@ export default function Page() {
               <h2>Заключение: какой провайдер голосового ИИ побеждает в 2026 году?</h2>
               <p>
                 На рынке англоязычного STT в 2026 году лидируют{" "}
-                <strong>ElevenLabs Scribe v2 Realtime (WER 3,4%)</strong> и{" "}
-                <strong>Alibaba Qwen3-ASR-Flash (WER 3,5%)</strong>, а AssemblyAI
-                Universal-3 Pro и Google Chirp 2 образуют конкурентный второй
-                эшелон в районе WER 5,1–5,4%. Для большинства продакшен-приложений
-                незначительная разница в точности между первым и вторым местом
-                несущественна — более важное инженерное решение состоит в том, как
-                справляться с маршрутизацией между языками, автоматическим
-                переключением и поддержанием актуальности бенчмарков со временем.
+                <strong>OpenAI GPT-4o Transcribe (WER 2,4%)</strong>,{" "}
+                <strong>Alibaba Qwen3-ASR (2,6%)</strong> и{" "}
+                <strong>ElevenLabs Scribe v2 (2,9%)</strong> — верхний сегмент
+                настолько плотный, что Speko называет его статистически
+                неотличимой группой, а xAI Grok STT и Cartesia Ink-2 идут следом.
+                Для большинства продакшен-приложений разница в точности внутри
+                этого верхнего сегмента пренебрежимо мала — более важное
+                инженерное решение состоит в том, как справляться с маршрутизацией
+                между языками, автоматическим переключением, задержкой и
+                поддержанием актуальности бенчмарков со временем.
               </p>
               <p>
                 У этого решения в 2026 году есть однозначный ответ:{" "}
@@ -757,7 +810,7 @@ export default function Page() {
                 STT-провайдера на всех поддерживаемых языках и автоматически
                 направляет каждый вызов текущему лучшему исполнителю — без изменений
                 кода, без жонглирования учётными данными, без ручной переоценки
-                каждый квартал. Когда лидирует ElevenLabs, вызовы идут туда. Когда
+                каждый квартал. Когда лидирует OpenAI, вызовы идут туда. Когда
                 вперёд выходит другой провайдер, маршрутизация незаметно обновляется
                 на стороне Speko.
               </p>
