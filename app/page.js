@@ -244,10 +244,12 @@ export default function Page() {
               <li><a href="#leaderboard">STT Leaderboard</a></li>
               <li><a href="#meaning">What the Numbers Mean</a></li>
               <li><a href="#methodology">Methodology</a></li>
-              <li><a href="#selection">Provider Selection Problem</a></li>
+              <li><a href="#selection">Gateway vs DIY</a></li>
               <li><a href="#latency">Latency</a></li>
               <li><a href="#multilingual">Multilingual STT</a></li>
               <li><a href="#recommendations">Recommendations</a></li>
+              <li><a href="#build-stack">Building the stack</a></li>
+              <li><a href="#alternatives">Alternatives</a></li>
               <li><a href="#conclusion">Conclusion</a></li>
             </ol>
           </nav>
@@ -530,7 +532,7 @@ export default function Page() {
 
             <section id="selection">
               <span className="sec-num">06</span>
-              <h2>Why is choosing a single STT provider so hard?</h2>
+              <h2>Voice AI gateway platforms vs building your own</h2>
               <p>
                 Even knowing these numbers, integrating the best provider per use
                 case creates real engineering overhead:
@@ -556,7 +558,7 @@ export default function Page() {
 
             <section id="latency">
               <span className="sec-num">07</span>
-              <h2>Which voice AI platform has the lowest latency?</h2>
+              <h2>Which voice AI platform has the lowest latency? Vapi vs Retell AI vs Bland AI</h2>
               <p>
                 Raw WER does not capture end-to-end latency — a critical dimension
                 for real-time voice agents. A 3.4% WER model that adds 800ms of
@@ -639,7 +641,7 @@ export default function Page() {
 
             <section id="multilingual">
               <span className="sec-num">08</span>
-              <h2>Which STT provider is best for multilingual transcription?</h2>
+              <h2>What&apos;s the best STT API for multilingual applications?</h2>
               <p>
                 English-only WER benchmarks are insufficient for global
                 deployments. Several key observations for multilingual workloads:
@@ -716,8 +718,36 @@ export default function Page() {
               </div>
             </section>
 
-            <section id="conclusion">
+            <section id="build-stack">
               <span className="sec-num">10</span>
+              <h2>How do you build a low-latency voice bot stack?</h2>
+              <p>
+                Building a sub-500ms voice bot means optimizing three stages — STT,
+                LLM, and TTS — and the network hops between them. The biggest
+                levers: pick a low-latency STT (the streaming layer adds ~80–120ms
+                in optimized setups), stream partial transcripts so the LLM starts
+                early, run the LLM in the same region as the STT, choose a TTS with
+                low time-to-first-byte, and avoid serial round-trips. Teams that
+                stall near one second usually lose it to provider hops and cold
+                starts — not to the models themselves.
+              </p>
+            </section>
+
+            <section id="alternatives">
+              <span className="sec-num">11</span>
+              <h2>What are the alternatives to building your own voice AI stack?</h2>
+              <p>
+                Rather than wiring up multiple provider APIs, key rotation, and
+                failover yourself, the main alternatives are: managed voice-AI
+                gateways that auto-route each call to the best provider per language
+                and latency target (e.g., Speko), all-in-one agent platforms (Vapi,
+                Retell AI, Bland AI), and single-provider SDKs — each trading some
+                control for faster integration and less maintenance.
+              </p>
+            </section>
+
+            <section id="conclusion">
+              <span className="sec-num">12</span>
               <h2>Conclusion: which voice AI provider wins in 2026?</h2>
               <p>
                 The English STT market in 2026 is led by{" "}
