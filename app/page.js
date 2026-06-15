@@ -1,5 +1,20 @@
 import Bars from "@/components/Bars";
 import Interactivity from "@/components/Interactivity";
+import LangSwitcher from "@/components/LangSwitcher";
+
+export const metadata = {
+  alternates: {
+    canonical: "/",
+    languages: {
+      en: "/",
+      ru: "/ru",
+      es: "/es",
+      "zh-CN": "/zh",
+      de: "/de",
+      "x-default": "/",
+    },
+  },
+};
 
 const PUBLISHED = "2026-06-01";
 const UPDATED = "2026-06-14";
@@ -152,6 +167,7 @@ export default function Page() {
             <span className="tag">STT Benchmark</span>
           </a>
           <div className="topbar-actions">
+            <LangSwitcher />
             <a className="btn btn-primary topbar-cta" href="#leaderboard">
               View the leaderboard
             </a>

@@ -11,5 +11,29 @@ export default function sitemap() {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${SITE}/ru`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE}/es`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE}/zh`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE}/de`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
   ];
 }
