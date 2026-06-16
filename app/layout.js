@@ -27,9 +27,9 @@ const FAVICON =
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
 const TITLE =
-  "Best Speech-to-Text Models and AI Agent APIs in 2026: by Aurora Reviews";
+  "Best Speech-to-Text APIs in 2026: WER, Speed & Cost Ranked";
 const DESCRIPTION =
-  "Independent 2026 benchmark review of speech-to-text providers — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI, Cartesia — ranked by FLEURS Word Error Rate (WER), speed, and price per minute, with recommendations by use case.";
+  "We benchmarked 6 STT APIs on FLEURS: OpenAI GPT-4o Transcribe leads at 2.4% WER, but the top 4 are a statistical tie. Speed and cost decide your winner — with per-use-case picks.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
