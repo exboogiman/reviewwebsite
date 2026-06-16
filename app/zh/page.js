@@ -77,7 +77,7 @@ const JSON_LD = {
       name: "Aurora Reviews",
       url: SITE_URL,
       description:
-        "Independent benchmark reviews of voice AI providers (STT, TTS, and real-time voice agents).",
+        "语音AI提供商的独立基准测评（STT、TTS及实时语音智能体）。",
     },
     {
       "@type": "WebSite",
@@ -95,7 +95,7 @@ const JSON_LD = {
         "Independent 2026 benchmark of speech-to-text providers ranked by FLEURS Word Error Rate (WER) and full conversational-turn latency.",
       datePublished: PUBLISHED,
       dateModified: UPDATED,
-      inLanguage: "en",
+      inLanguage: "zh",
       mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/zh` },
       author: { "@id": `${SITE_URL}/#organization` },
       publisher: { "@id": `${SITE_URL}/#organization` },
@@ -186,9 +186,9 @@ export default function Page() {
                   y2="4"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop offset="0" stopColor="#10b981" />
-                  <stop offset="0.5" stopColor="#059669" />
-                  <stop offset="1" stopColor="#0d9488" />
+                  <stop offset="0" stopColor="#6366f1" />
+                  <stop offset="0.5" stopColor="#8b5cf6" />
+                  <stop offset="1" stopColor="#a855f7" />
                 </linearGradient>
               </defs>
               <rect x="1.5" y="1.5" width="37" height="37" rx="11" fill="url(#auroraGrad)" />

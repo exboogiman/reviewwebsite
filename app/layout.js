@@ -74,7 +74,7 @@ export const metadata = {
     title: TITLE,
     description: DESCRIPTION,
   },
-  icons: { icon: FAVICON },
+  icons: { icon: "/favicon.svg" },
 };
 
 // Default to light for all first-time visitors (ignore the OS dark preference),

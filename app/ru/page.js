@@ -188,9 +188,9 @@ export default function Page() {
                   y2="4"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop offset="0" stopColor="#c1121f" />
-                  <stop offset="0.5" stopColor="#db2777" />
-                  <stop offset="1" stopColor="#7c3aed" />
+                  <stop offset="0" stopColor="#6366f1" />
+                  <stop offset="0.5" stopColor="#8b5cf6" />
+                  <stop offset="1" stopColor="#a855f7" />
                 </linearGradient>
               </defs>
               <rect x="1.5" y="1.5" width="37" height="37" rx="11" fill="url(#auroraGrad)" />

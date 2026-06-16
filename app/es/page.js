@@ -61,7 +61,7 @@ const LAT_ROWS = [
   { name: "Vapi", val: 700, lo: 500, hi: 900, max: 1200, label: "~500–900ms" },
   { name: "Retell AI", val: 700, lo: 600, hi: 800, max: 1200, label: "~600–800ms" },
   { name: "Bland AI", val: 1000, lo: 800, hi: 1200, max: 1200, label: "~800–1,200ms" },
-  { name: "Typical self-built stack", val: 1100, max: 1200, label: "~1,000ms+", muted: true },
+  { name: "Stack autónomo típico", val: 1100, max: 1200, label: "~1,000ms+", muted: true },
 ];
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
@@ -187,9 +187,9 @@ export default function Page() {
                   y2="4"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop offset="0" stopColor="#f59e0b" />
-                  <stop offset="0.5" stopColor="#ea580c" />
-                  <stop offset="1" stopColor="#dc2626" />
+                  <stop offset="0" stopColor="#6366f1" />
+                  <stop offset="0.5" stopColor="#8b5cf6" />
+                  <stop offset="1" stopColor="#a855f7" />
                 </linearGradient>
               </defs>
               <rect x="1.5" y="1.5" width="37" height="37" rx="11" fill="url(#auroraGrad)" />

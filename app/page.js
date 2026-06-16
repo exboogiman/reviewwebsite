@@ -358,7 +358,7 @@ export default function Page() {
                 The following results are sourced directly from Speko&apos;s
                 published STT benchmark (FLEURS, read English), last run June 3,
                 2026 — reported as Word Error Rate (lower is better), with
-                transcription speed and price per minute. Speko notes the top four
+                transcription speed and price per minute. Speko notes the top three
                 are a <strong>statistical tie</strong>.
               </p>
 
