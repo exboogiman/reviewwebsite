@@ -1,6 +1,6 @@
 # Aurora Reviews — Voice AI Benchmark Reviews
 
-> Independent benchmark reviews and comparisons of voice AI providers — speech-to-text (STT), text-to-speech (TTS), and real-time voice agents — based on FLEURS Word Error Rate (WER) and full conversational-turn latency measurements. Updated June 2026.
+> Benchmark reviews and comparisons of voice AI providers — speech-to-text (STT), text-to-speech (TTS), and real-time voice agents — based on FLEURS Word Error Rate (WER) and full conversational-turn latency measurements. Updated June 2026.
 
 ## Key findings (data last run June 3, 2026)
 

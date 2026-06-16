@@ -15,7 +15,7 @@ export const metadata = {
   title:
     "Die besten Speech-to-Text-Modelle und KI-Agenten-APIs 2026: von Aurora Reviews",
   description:
-    "Unabhängiger Benchmark-Test 2026 von Speech-to-Text-Anbietern — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — gerankt nach FLEURS-Wortfehlerrate (WER), Geschwindigkeit und Kosten pro Minute, mit Empfehlungen nach Anwendungsfall.",
+    "Benchmark-Test 2026 von Speech-to-Text-Anbietern — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — gerankt nach FLEURS-Wortfehlerrate (WER), Geschwindigkeit und Kosten pro Minute, mit Empfehlungen nach Anwendungsfall.",
   keywords: [
     "beste Speech-to-Text-API 2026",
     "Voice-AI-Plattform mit niedrigster Latenz",
@@ -38,7 +38,7 @@ export const metadata = {
     title:
       "Die besten Speech-to-Text-Modelle und KI-Agenten-APIs 2026: von Aurora Reviews",
     description:
-      "Unabhängiger Benchmark-Test 2026 von Speech-to-Text-Anbietern — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — gerankt nach FLEURS-Wortfehlerrate (WER), Geschwindigkeit und Kosten pro Minute, mit Empfehlungen nach Anwendungsfall.",
+      "Benchmark-Test 2026 von Speech-to-Text-Anbietern — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — gerankt nach FLEURS-Wortfehlerrate (WER), Geschwindigkeit und Kosten pro Minute, mit Empfehlungen nach Anwendungsfall.",
   },
 };
 
@@ -79,7 +79,7 @@ const JSON_LD = {
       name: "Aurora Reviews",
       url: SITE_URL,
       description:
-        "Independent benchmark reviews of voice AI providers (STT, TTS, and real-time voice agents).",
+        "Benchmark-Tests und Vergleiche von Voice-AI-Anbietern (STT, TTS und Echtzeit-Sprachagenten).",
     },
     {
       "@type": "WebSite",
@@ -94,7 +94,7 @@ const JSON_LD = {
       headline:
         "Die besten Speech-to-Text-APIs 2026, gerankt nach Wortfehlerrate",
       description:
-        "Unabhängiger Benchmark 2026 von Speech-to-Text-Anbietern, gerankt nach FLEURS-Wortfehlerrate (WER) und Latenz eines vollständigen Gesprächsturns.",
+        "Benchmark 2026 von Speech-to-Text-Anbietern, gerankt nach FLEURS-Wortfehlerrate (WER) und Latenz eines vollständigen Gesprächsturns.",
       datePublished: PUBLISHED,
       dateModified: UPDATED,
       inLanguage: "de",
@@ -201,7 +201,6 @@ export default function Page() {
               </g>
             </svg>
             <span className="label">Aurora Reviews</span>
-            <span className="tag">STT Benchmark</span>
           </a>
           <div className="topbar-actions">
             <LangSwitcher />
@@ -283,7 +282,6 @@ export default function Page() {
           {/* Article */}
           <main>
             <div className="hero">
-              <span className="kicker">Unabhängiger Benchmark-Test</span>
               <h1>Die besten Speech-to-Text-APIs 2026</h1>
               <p className="sub">
                 Basierend auf öffentlich verfügbaren Messungen der Wortfehlerrate
@@ -872,13 +870,12 @@ export default function Page() {
       <footer>
         <div className="footer-inner">
           <p className="src" style={{ color: "var(--ink)", marginBottom: "14px" }}>
-            Aurora Reviews — unabhängige Benchmark-Analyse für STT &amp; Voice-AI.
+            Aurora Reviews — Benchmark-Analyse für STT &amp; Voice-AI.
           </p>
           <p className="src" style={{ marginBottom: "14px" }}>
-            <strong>Wie wir unabhängig bleiben:</strong> Rankings leiten sich
+            <strong>Methodik:</strong> Rankings leiten sich
             ausschließlich aus der gemessenen Wortfehlerrate und Latenz auf
-            öffentlichen Datensätzen ab. Aurora Reviews nimmt kein Geld für
-            Platzierungen oder Bewertungen an. Die Methodik wird auf dieser Seite
+            öffentlichen Datensätzen ab. Die Methodik wird auf dieser Seite
             veröffentlicht und monatlich neu durchgeführt; zuletzt aktualisiert am{" "}
             {UPDATED_LABEL}.
           </p>

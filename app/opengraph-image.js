@@ -38,7 +38,7 @@ export default function Image() {
               fontWeight: 600,
             }}
           >
-            Independent Benchmark · 2026
+            STT Benchmark · 2026
           </div>
           <div
             style={{

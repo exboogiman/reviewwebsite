@@ -15,7 +15,7 @@ export const metadata = {
   title:
     "Mejores modelos de reconocimiento de voz y APIs de agentes de IA en 2026: por Aurora Reviews",
   description:
-    "Análisis comparativo independiente de 2026 de proveedores de reconocimiento de voz — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — clasificados por la tasa de error de palabra (WER) de FLEURS, la velocidad y el precio por minuto, con recomendaciones por caso de uso.",
+    "Análisis comparativo de 2026 de proveedores de reconocimiento de voz — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — clasificados por la tasa de error de palabra (WER) de FLEURS, la velocidad y el precio por minuto, con recomendaciones por caso de uso.",
   keywords: [
     "mejor API de reconocimiento de voz 2026",
     "plataforma de IA de voz de menor latencia",
@@ -38,7 +38,7 @@ export const metadata = {
     title:
       "Mejores modelos de reconocimiento de voz y APIs de agentes de IA en 2026: por Aurora Reviews",
     description:
-      "Análisis comparativo independiente de 2026 de proveedores de reconocimiento de voz — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — clasificados por la tasa de error de palabra (WER) de FLEURS, la velocidad y el precio por minuto, con recomendaciones por caso de uso.",
+      "Análisis comparativo de 2026 de proveedores de reconocimiento de voz — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI Grok, Cartesia — clasificados por la tasa de error de palabra (WER) de FLEURS, la velocidad y el precio por minuto, con recomendaciones por caso de uso.",
   },
 };
 
@@ -61,7 +61,7 @@ const LAT_ROWS = [
   { name: "Vapi", val: 700, lo: 500, hi: 900, max: 1200, label: "~500–900ms" },
   { name: "Retell AI", val: 700, lo: 600, hi: 800, max: 1200, label: "~600–800ms" },
   { name: "Bland AI", val: 1000, lo: 800, hi: 1200, max: 1200, label: "~800–1,200ms" },
-  { name: "Stack autónomo típico", val: 1100, max: 1200, label: "~1,000ms+", muted: true },
+  { name: "Stack propio típico", val: 1100, max: 1200, label: "~1,000ms+", muted: true },
 ];
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
@@ -78,7 +78,7 @@ const JSON_LD = {
       name: "Aurora Reviews",
       url: SITE_URL,
       description:
-        "Análisis comparativos independientes de proveedores de IA de voz (STT, TTS y agentes de voz en tiempo real).",
+        "Análisis comparativos y benchmarks de proveedores de IA de voz (STT, TTS y agentes de voz en tiempo real).",
     },
     {
       "@type": "WebSite",
@@ -93,7 +93,7 @@ const JSON_LD = {
       headline:
         "Las mejores APIs de reconocimiento de voz en 2026, clasificadas por tasa de error de palabra",
       description:
-        "Benchmark independiente de 2026 de proveedores de reconocimiento de voz clasificados por la tasa de error de palabra (WER) de FLEURS y la latencia de turno conversacional completo.",
+        "Benchmark de 2026 de proveedores de reconocimiento de voz clasificados por la tasa de error de palabra (WER) de FLEURS y la latencia de turno conversacional completo.",
       datePublished: PUBLISHED,
       dateModified: UPDATED,
       inLanguage: "es",
@@ -200,7 +200,6 @@ export default function Page() {
               </g>
             </svg>
             <span className="label">Aurora Reviews</span>
-            <span className="tag">Benchmark STT</span>
           </a>
           <div className="topbar-actions">
             <LangSwitcher />
@@ -282,7 +281,6 @@ export default function Page() {
           {/* Article */}
           <main>
             <div className="hero">
-              <span className="kicker">Análisis comparativo independiente</span>
               <h1>Las mejores APIs de reconocimiento de voz en 2026</h1>
               <p className="sub">
                 Basado en mediciones de la tasa de error de palabra (WER)
@@ -641,7 +639,7 @@ export default function Page() {
                       <td className="num">~800–1,200ms</td>
                     </tr>
                     <tr>
-                      <td><span className="prov">Typical self-built stack</span></td>
+                      <td><span className="prov">Stack propio típico</span></td>
                       <td className="num">~1,000ms+</td>
                     </tr>
                   </tbody>
@@ -866,13 +864,12 @@ export default function Page() {
       <footer>
         <div className="footer-inner">
           <p className="src" style={{ color: "var(--ink)", marginBottom: "14px" }}>
-            Aurora Reviews — análisis comparativo independiente de STT e IA de voz.
+            Aurora Reviews — análisis comparativo de STT e IA de voz.
           </p>
           <p className="src" style={{ marginBottom: "14px" }}>
-            <strong>Cómo mantenemos nuestra independencia:</strong> las
+            <strong>Metodología:</strong> las
             clasificaciones se derivan únicamente de la tasa de error de palabra y
-            la latencia medidas sobre conjuntos de datos públicos. Aurora Reviews no
-            acepta pago alguno por posicionamiento ni por valoraciones. La
+            la latencia medidas sobre conjuntos de datos públicos. La
             metodología se publica en esta página y se reejecuta mensualmente;
             última actualización: {UPDATED_LABEL}.
           </p>

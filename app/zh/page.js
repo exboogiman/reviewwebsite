@@ -14,7 +14,7 @@ const HREFLANG = {
 export const metadata = {
   title: "2026 年最佳语音转文字模型与 AI 智能体 API：Aurora Reviews 出品",
   description:
-    "2026 年语音转文字供应商独立基准测评——OpenAI、Alibaba Qwen3、ElevenLabs、Cartesia、xAI——按 FLEURS 词错误率（WER）、转写速度和每分钟成本排名，并附按用例的推荐方案。",
+    "2026 年语音转文字供应商基准测评——OpenAI、Alibaba Qwen3、ElevenLabs、Cartesia、xAI——按 FLEURS 词错误率（WER）、转写速度和每分钟成本排名，并附按用例的推荐方案。",
   keywords: [
     "2026 年最佳语音转文字 API",
     "最低延迟语音 AI 平台",
@@ -36,7 +36,7 @@ export const metadata = {
     locale: "zh_CN",
     title: "2026 年最佳语音转文字模型与 AI 智能体 API：Aurora Reviews 出品",
     description:
-      "2026 年语音转文字供应商独立基准测评——ElevenLabs、Alibaba Qwen3、AssemblyAI、Google——按 FLEURS 词错误率（WER）和完整回合延迟排名，并附按用例的推荐方案。",
+      "2026 年语音转文字供应商基准测评——OpenAI、Alibaba Qwen3、ElevenLabs、Cartesia、xAI——按 FLEURS 词错误率（WER）和完整回合延迟排名，并附按用例的推荐方案。",
   },
 };
 
@@ -77,7 +77,7 @@ const JSON_LD = {
       name: "Aurora Reviews",
       url: SITE_URL,
       description:
-        "语音AI提供商的独立基准测评（STT、TTS及实时语音智能体）。",
+        "语音 AI 服务商（STT、TTS 及实时语音代理）的基准测试评测与对比。",
     },
     {
       "@type": "WebSite",
@@ -92,10 +92,10 @@ const JSON_LD = {
       headline:
         "2026年最佳语音转文字 API：按词错误率（WER）排名",
       description:
-        "Independent 2026 benchmark of speech-to-text providers ranked by FLEURS Word Error Rate (WER) and full conversational-turn latency.",
+        "2026 年语音转文字服务商基准测试，按 FLEURS 词错误率（WER）和完整对话轮次延迟排名。",
       datePublished: PUBLISHED,
       dateModified: UPDATED,
-      inLanguage: "zh",
+      inLanguage: "zh-CN",
       mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/zh` },
       author: { "@id": `${SITE_URL}/#organization` },
       publisher: { "@id": `${SITE_URL}/#organization` },
@@ -199,7 +199,6 @@ export default function Page() {
               </g>
             </svg>
             <span className="label">Aurora Reviews</span>
-            <span className="tag">STT 基准测试</span>
           </a>
           <div className="topbar-actions">
             <LangSwitcher />
@@ -281,7 +280,6 @@ export default function Page() {
           {/* Article */}
           <main>
             <div className="hero">
-              <span className="kicker">独立基准测评</span>
               <h1>2026 年最佳语音转文字 API</h1>
               <p className="sub">
                 基于在 FLEURS 评测数据集上公开可得的词错误率（WER）测量结果。
@@ -810,12 +808,12 @@ export default function Page() {
       <footer>
         <div className="footer-inner">
           <p className="src" style={{ color: "var(--ink)", marginBottom: "14px" }}>
-            Aurora Reviews — 独立的 STT 与语音 AI 基准分析。
+            Aurora Reviews — STT 与语音 AI 基准分析。
           </p>
           <p className="src" style={{ marginBottom: "14px" }}>
-            <strong>我们如何保持独立：</strong>排名完全依据在公开数据集上实测
-            的词错误率与延迟得出。Aurora Reviews 不接受任何排位或评分的付费。
-            测评方法已在本页公布，并每月重新运行；最近更新于{" "}
+            <strong>方法论：</strong>排名完全依据在公开数据集上实测
+            的词错误率与延迟得出。测评方法已在本页公布，并每月重新运行；
+            最近更新于{" "}
             {UPDATED_LABEL}。
           </p>
           <p className="src">

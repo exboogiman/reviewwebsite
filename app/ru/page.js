@@ -15,7 +15,7 @@ export const metadata = {
   title:
     "Лучшие модели и API распознавания речи в 2026 году: обзор Aurora Reviews",
   description:
-    "Независимый обзор-бенчмарк провайдеров распознавания речи в 2026 году — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI, Cartesia — с рейтингом по доле ошибочных слов (WER) на датасете FLEURS, скорости и цене за минуту, с рекомендациями по сценариям использования.",
+    "Обзор-бенчмарк провайдеров распознавания речи в 2026 году — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI, Cartesia — с рейтингом по доле ошибочных слов (WER) на датасете FLEURS, скорости и цене за минуту, с рекомендациями по сценариям использования.",
   keywords: [
     "сравнение распознавания речи",
     "лучший STT API 2026",
@@ -39,7 +39,7 @@ export const metadata = {
     title:
       "Лучшие модели и API распознавания речи в 2026 году: обзор Aurora Reviews",
     description:
-      "Независимый обзор-бенчмарк провайдеров распознавания речи в 2026 году — ElevenLabs, Alibaba Qwen3, AssemblyAI, Google — с рейтингом по доле ошибочных слов (WER) на датасете FLEURS и полной задержке диалогового хода, с рекомендациями по сценариям использования.",
+      "Обзор-бенчмарк провайдеров распознавания речи в 2026 году — OpenAI GPT-4o Transcribe, Alibaba Qwen3-ASR, ElevenLabs Scribe v2, xAI, Cartesia — с рейтингом по доле ошибочных слов (WER) на датасете FLEURS и полной задержке диалогового хода, с рекомендациями по сценариям использования.",
   },
 };
 
@@ -79,7 +79,7 @@ const JSON_LD = {
       name: "Aurora Reviews",
       url: SITE_URL,
       description:
-        "Независимые обзоры-бенчмарки провайдеров голосового ИИ (STT, TTS и голосовые агенты реального времени).",
+        "Обзоры и сравнения бенчмарков провайдеров голосового ИИ (STT, TTS и голосовые агенты реального времени).",
     },
     {
       "@type": "WebSite",
@@ -94,7 +94,7 @@ const JSON_LD = {
       headline:
         "Лучшие API распознавания речи в 2026 году, рейтинг по доле ошибочных слов (WER)",
       description:
-        "Независимый бенчмарк провайдеров распознавания речи 2026 года с рейтингом по доле ошибочных слов (WER) на FLEURS и задержке полного хода диалога.",
+        "Обзоры и сравнения бенчмарков провайдеров распознавания речи 2026 года с рейтингом по доле ошибочных слов (WER) на FLEURS и задержке полного хода диалога.",
       datePublished: PUBLISHED,
       dateModified: UPDATED,
       inLanguage: "ru",
@@ -201,7 +201,6 @@ export default function Page() {
               </g>
             </svg>
             <span className="label">Aurora Reviews</span>
-            <span className="tag">Бенчмарк STT</span>
           </a>
           <div className="topbar-actions">
             <LangSwitcher />
@@ -283,7 +282,6 @@ export default function Page() {
           {/* Article */}
           <main>
             <div className="hero">
-              <span className="kicker">Независимый обзор-бенчмарк</span>
               <h1>Лучшие API распознавания речи в 2026 году</h1>
               <p className="sub">
                 На основе общедоступных измерений доли ошибочных слов (WER) на
@@ -863,12 +861,11 @@ export default function Page() {
       <footer>
         <div className="footer-inner">
           <p className="src" style={{ color: "var(--ink)", marginBottom: "14px" }}>
-            Aurora Reviews — независимый анализ-бенчмарк STT и голосового ИИ.
+            Aurora Reviews — анализ-бенчмарк STT и голосового ИИ.
           </p>
           <p className="src" style={{ marginBottom: "14px" }}>
-            <strong>Как мы сохраняем независимость:</strong> рейтинги выводятся
-            исключительно из измеренной доли ошибочных слов и задержки на публичных
-            датасетах. Aurora Reviews не принимает оплату за размещение или оценки.
+            <strong>Методология:</strong> рейтинги выводятся исключительно из
+            измеренной доли ошибочных слов и задержки на публичных датасетах.
             Методология опубликована на этой странице и перезапускается ежемесячно;
             последнее обновление — {UPDATED_LABEL}.
           </p>

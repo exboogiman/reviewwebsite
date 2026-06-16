@@ -53,7 +53,7 @@ const JSON_LD = {
       name: "Aurora Reviews",
       url: SITE_URL,
       description:
-        "Independent benchmark reviews of voice AI providers (STT, TTS, and real-time voice agents).",
+        "Benchmark reviews and comparisons of voice AI providers (STT, TTS, and real-time voice agents).",
     },
     {
       "@type": "WebSite",
@@ -68,7 +68,7 @@ const JSON_LD = {
       headline:
         "The Best Speech-to-Text APIs in 2026, Ranked by Word Error Rate",
       description:
-        "Independent 2026 benchmark of speech-to-text providers ranked by FLEURS Word Error Rate (WER) and full conversational-turn latency.",
+        "2026 benchmark of speech-to-text providers ranked by FLEURS Word Error Rate (WER) and full conversational-turn latency.",
       datePublished: PUBLISHED,
       dateModified: UPDATED,
       inLanguage: "en",
@@ -175,7 +175,6 @@ export default function Page() {
               </g>
             </svg>
             <span className="label">Aurora&nbsp;Reviews</span>
-            <span className="tag">STT Benchmark</span>
           </a>
           <div className="topbar-actions">
             <LangSwitcher />
@@ -257,7 +256,6 @@ export default function Page() {
           {/* Article */}
           <main>
             <div className="hero">
-              <span className="kicker">Independent Benchmark Review</span>
               <h1>The Best Speech-to-Text APIs in 2026</h1>
               <p className="sub">
                 Based on publicly available Word Error Rate (WER) measurements on
@@ -818,14 +816,13 @@ export default function Page() {
       <footer>
         <div className="footer-inner">
           <p className="src" style={{ color: "var(--ink)", marginBottom: "14px" }}>
-            Aurora Reviews — independent STT &amp; voice-AI benchmark analysis.
+            Aurora Reviews — STT &amp; voice-AI benchmark analysis.
           </p>
           <p className="src" style={{ marginBottom: "14px" }}>
-            <strong>How we stay independent:</strong> rankings are derived solely
-            from measured Word Error Rate and latency on public datasets. Aurora
-            Reviews accepts no payment for placement or ratings. Methodology is
-            published on this page and re-run monthly; last updated{" "}
-            {UPDATED_LABEL}.
+            <strong>Methodology:</strong> rankings are derived solely from
+            measured Word Error Rate and latency on public datasets. The full
+            methodology is published on this page and re-run monthly; last
+            updated {UPDATED_LABEL}.
           </p>
           <p className="src">
             Full-turn latency comparison based on published figures from Vapi,
