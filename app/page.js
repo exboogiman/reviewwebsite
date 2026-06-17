@@ -41,6 +41,35 @@ const LAT_ROWS = [
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
 
+// Answer-first FAQ — rendered both as a visible section and as FAQPage JSON-LD,
+// using the same text so the structured data matches the page (GEO consistency).
+const FAQ_ITEMS = [
+  {
+    q: "What is the most accurate speech-to-text API in 2026?",
+    a: "OpenAI GPT-4o Transcribe leads with a 2.4% Word Error Rate (WER) on the FLEURS read-English benchmark, followed by Alibaba Qwen3-ASR at 2.6% and ElevenLabs Scribe v2 at 2.9%. The top four providers are within a statistical tie, so latency and price usually decide the winner rather than raw accuracy.",
+  },
+  {
+    q: "What is a good Word Error Rate (WER) for speech-to-text?",
+    a: "For clean, read English audio, a WER under 5% is excellent. The 2026 leaders cluster between 2.4% and 2.9% — roughly two to three errors per 100 words — while anything above about 10% (such as Gradium at 13.2%) is noticeably error-prone.",
+  },
+  {
+    q: "Which speech-to-text API is the cheapest?",
+    a: "Cartesia Ink-2 is the cheapest at $0.0022 per minute — about three times less than the top-accuracy providers (OpenAI GPT-4o Transcribe at $0.0060/min and ElevenLabs Scribe v2 at $0.0067/min), in exchange for a higher 6.1% WER.",
+  },
+  {
+    q: "What is the lowest-latency voice AI platform?",
+    a: "Speko has the fastest published full conversational turn at roughly 340ms median (STT + LLM + TTS combined), the only platform below the ~500ms human-perception threshold. Agent platforms such as Vapi, Retell AI and Bland AI typically range from 500ms to 1,200ms.",
+  },
+  {
+    q: "Is OpenAI GPT-4o Transcribe better than ElevenLabs Scribe v2?",
+    a: "On the FLEURS read-English benchmark, OpenAI GPT-4o Transcribe (2.4% WER) edges out ElevenLabs Scribe v2 (2.9% WER), but the gap falls within a statistical tie. For most production workloads, transcription speed and price per minute matter more than this small accuracy difference.",
+  },
+  {
+    q: "What dataset is used to benchmark speech-to-text accuracy?",
+    a: "These rankings use FLEURS (read English clips), with accuracy measured as Word Error Rate (WER %), where lower is better. The benchmark also reports transcription speed and list price per minute, and providers are re-evaluated monthly.",
+  },
+];
+
 // JSON-LD structured data: Organization + WebSite + TechArticle, plus an
 // ItemList of the ranked STT providers where each item carries an editorial
 // Review and AggregateRating. (No FAQ schema by request.)
@@ -125,6 +154,15 @@ const JSON_LD = {
             reviewCount: 1,
           },
         },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: FAQ_ITEMS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
   ],
@@ -249,6 +287,7 @@ export default function Page() {
               <li><a href="#recommendations">Recommendations</a></li>
               <li><a href="#build-stack">Building the stack</a></li>
               <li><a href="#alternatives">Alternatives</a></li>
+              <li><a href="#faq">FAQ</a></li>
               <li><a href="#conclusion">Conclusion</a></li>
             </ol>
           </nav>
@@ -332,8 +371,15 @@ export default function Page() {
               <h2>Why use the FLEURS benchmark to measure STT accuracy?</h2>
               <p>
                 FLEURS (Few-shot Learning Evaluation of Universal Representations
-                of Speech) is a widely adopted, publicly available speech
-                benchmark spanning 102 languages. Unlike proprietary test sets,
+                of Speech) is a widely adopted,{" "}
+                <a
+                  href="https://huggingface.co/datasets/google/fleurs"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  publicly available speech benchmark
+                </a>{" "}
+                spanning 102 languages. Unlike proprietary test sets,
                 FLEURS cannot be gamed through dataset contamination — every
                 provider is evaluated against the same diverse, real-world
                 utterances. Word Error Rate (WER) is reported as a percentage:{" "}
@@ -494,7 +540,15 @@ export default function Page() {
                 <li>
                   <strong>Accuracy metric:</strong> Word Error Rate (WER %),
                   computed on read English clips from the <strong>FLEURS</strong>
-                  {" "}dataset (Conneau et al., 2022). Lower is better.
+                  {" "}dataset (
+                  <a
+                    href="https://arxiv.org/abs/2205.12446"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Conneau et al., 2022
+                  </a>
+                  ). Lower is better.
                 </li>
                 <li>
                   <strong>Speed:</strong> wall-clock time to transcribe the
@@ -522,8 +576,7 @@ export default function Page() {
                 </li>
                 <li>
                   <strong>Editorial ratings</strong> (used in our structured data)
-                  are derived directly from measured WER on a 1–5 scale, not from
-                  sponsorships — Aurora Reviews accepts no payment for ranking.
+                  are derived directly from measured WER on a 1–5 scale.
                 </li>
               </ul>
             </section>
@@ -744,8 +797,19 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="conclusion">
+            <section id="faq">
               <span className="sec-num">12</span>
+              <h2>Frequently asked questions about speech-to-text in 2026</h2>
+              {FAQ_ITEMS.map((f) => (
+                <div key={f.q} className="faq-item">
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="conclusion">
+              <span className="sec-num">13</span>
               <h2>Conclusion: which voice AI provider wins in 2026?</h2>
               <p>
                 The English STT market in 2026 is led by{" "}

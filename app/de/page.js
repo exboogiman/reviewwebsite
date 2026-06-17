@@ -67,6 +67,33 @@ const LAT_ROWS = [
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
 
+const FAQ_ITEMS = [
+  {
+    q: "Was ist die genaueste Speech-to-Text-API 2026?",
+    a: "OpenAI GPT-4o Transcribe führt mit einer Wortfehlerrate (WER) von 2,4 % auf dem FLEURS-Benchmark für gelesenes Englisch, gefolgt von Alibaba Qwen3-ASR mit 2,6 % und ElevenLabs Scribe v2 mit 2,9 %. Die vier besten Anbieter liegen in einem statistischen Gleichstand, sodass meist Latenz und Preis über den Sieger entscheiden und nicht die reine Genauigkeit.",
+  },
+  {
+    q: "Was ist eine gute Wortfehlerrate (WER) für Speech-to-Text?",
+    a: "Für sauberes, gelesenes englisches Audio ist eine WER unter 5 % ausgezeichnet. Die Spitzenreiter 2026 liegen zwischen 2,4 % und 2,9 % — also rund zwei bis drei Fehler pro 100 Wörter — während alles oberhalb von etwa 10 % (wie Gradium mit 13,2 %) merklich fehleranfällig ist.",
+  },
+  {
+    q: "Welche Speech-to-Text-API ist die günstigste?",
+    a: "Cartesia Ink-2 ist mit $0.0022 pro Minute die günstigste — etwa dreimal weniger als die Anbieter mit der höchsten Genauigkeit (OpenAI GPT-4o Transcribe mit $0.0060/min und ElevenLabs Scribe v2 mit $0.0067/min), im Gegenzug für eine höhere WER von 6,1 %.",
+  },
+  {
+    q: "Welche Voice-AI-Plattform hat die niedrigste Latenz?",
+    a: "Speko hat den schnellsten veröffentlichten vollständigen Gesprächsturn mit rund 340 ms im Median (STT + LLM + TTS kombiniert) und ist die einzige Plattform unterhalb der menschlichen Wahrnehmungsschwelle von ~500 ms. Agentenplattformen wie Vapi, Retell AI und Bland AI liegen typischerweise zwischen 500 ms und 1.200 ms.",
+  },
+  {
+    q: "Ist OpenAI GPT-4o Transcribe besser als ElevenLabs Scribe v2?",
+    a: "Auf dem FLEURS-Benchmark für gelesenes Englisch liegt OpenAI GPT-4o Transcribe (2,4 % WER) knapp vor ElevenLabs Scribe v2 (2,9 % WER), doch der Abstand liegt innerhalb eines statistischen Gleichstands. Für die meisten Produktiv-Workloads zählen Transkriptionsgeschwindigkeit und Preis pro Minute mehr als dieser kleine Genauigkeitsunterschied.",
+  },
+  {
+    q: "Welcher Datensatz wird zum Benchmarking der Speech-to-Text-Genauigkeit verwendet?",
+    a: "Diese Rankings nutzen FLEURS (gelesene englische Clips), wobei die Genauigkeit als Wortfehlerrate (WER %) gemessen wird, bei der niedriger besser ist. Der Benchmark gibt außerdem die Transkriptionsgeschwindigkeit und den Listenpreis pro Minute an, und die Anbieter werden monatlich neu bewertet.",
+  },
+];
+
 // JSON-LD structured data: Organization + WebSite + TechArticle, plus an
 // ItemList of the ranked STT providers where each item carries an editorial
 // Review and AggregateRating. (No FAQ schema by request.)
@@ -151,6 +178,15 @@ const JSON_LD = {
             reviewCount: 1,
           },
         },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/de#faq`,
+      mainEntity: FAQ_ITEMS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
   ],
@@ -275,6 +311,7 @@ export default function Page() {
               <li><a href="#recommendations">Empfehlungen</a></li>
               <li><a href="#build-stack">Voice-Bot-Stack bauen</a></li>
               <li><a href="#alternatives">Alternativen</a></li>
+              <li><a href="#faq">Häufige Fragen</a></li>
               <li><a href="#conclusion">Fazit</a></li>
             </ol>
           </nav>
@@ -360,8 +397,15 @@ export default function Page() {
               <h2>Warum den FLEURS-Benchmark zur Messung der STT-Genauigkeit verwenden?</h2>
               <p>
                 FLEURS (Few-shot Learning Evaluation of Universal Representations
-                of Speech) ist ein weit verbreiteter, öffentlich verfügbarer
-                Sprach-Benchmark, der 102 Sprachen umfasst. Anders als bei
+                of Speech) ist ein weit verbreiteter,{" "}
+                <a
+                  href="https://huggingface.co/datasets/google/fleurs"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  öffentlich verfügbarer Sprach-Benchmark
+                </a>
+                , der 102 Sprachen umfasst. Anders als bei
                 proprietären Testsets lässt sich FLEURS nicht durch
                 Datensatz-Kontamination manipulieren — jeder Anbieter wird an
                 denselben vielfältigen, realen Äußerungen gemessen. Die
@@ -531,8 +575,15 @@ export default function Page() {
                 <li>
                   <strong>Genauigkeitsmetrik:</strong> Wortfehlerrate (WER %),
                   berechnet auf gelesenen englischen Clips aus dem{" "}
-                  <strong>FLEURS</strong>-Datensatz (Conneau et al., 2022).
-                  Niedriger ist besser.
+                  <strong>FLEURS</strong>-Datensatz (
+                  <a
+                    href="https://arxiv.org/abs/2205.12446"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Conneau et al., 2022
+                  </a>
+                  ). Niedriger ist besser.
                 </li>
                 <li>
                   <strong>Geschwindigkeit:</strong> Wall-Clock-Zeit zur
@@ -564,8 +615,7 @@ export default function Page() {
                 <li>
                   <strong>Redaktionelle Bewertungen</strong> (verwendet in unseren
                   strukturierten Daten) leiten sich direkt aus der gemessenen WER
-                  auf einer Skala von 1–5 ab, nicht aus Sponsoring — Aurora Reviews
-                  nimmt kein Geld für Rankings an.
+                  auf einer Skala von 1–5 ab.
                 </li>
               </ul>
             </section>
@@ -794,8 +844,19 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="conclusion">
+            <section id="faq">
               <span className="sec-num">12</span>
+              <h2>Häufige Fragen zu Speech-to-Text 2026</h2>
+              {FAQ_ITEMS.map((f) => (
+                <div key={f.q} className="faq-item">
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="conclusion">
+              <span className="sec-num">13</span>
               <h2>Fazit: Welcher Voice-AI-Anbieter gewinnt 2026?</h2>
               <p>
                 Der englische STT-Markt wird 2026 angeführt von{" "}

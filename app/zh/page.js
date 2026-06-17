@@ -65,6 +65,33 @@ const LAT_ROWS = [
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
 
+const FAQ_ITEMS = [
+  {
+    q: "2026 年最准确的语音转文字 API 是哪一个？",
+    a: "OpenAI GPT-4o Transcribe 以 2.4% 的词错误率（WER）在 FLEURS 朗读英语基准上领先，其后是 Alibaba Qwen3-ASR（2.6%）和 ElevenLabs Scribe v2（2.9%）。前四名供应商处于统计意义上的并列，因此通常是延迟和价格而非原始准确率决定胜负。",
+  },
+  {
+    q: "语音转文字的词错误率（WER）多少算好？",
+    a: "对于干净的朗读英语音频，WER 低于 5% 就属于优秀。2026 年的领先者集中在 2.4% 到 2.9% 之间——大约每 100 个单词有两到三个错误——而高于约 10% 的（例如 Gradium 的 13.2%）则明显容易出错。",
+  },
+  {
+    q: "哪个语音转文字 API 最便宜？",
+    a: "Cartesia Ink-2 最便宜，每分钟 $0.0022——约为最高准确率供应商（OpenAI GPT-4o Transcribe 为 $0.0060/min，ElevenLabs Scribe v2 为 $0.0067/min）的三分之一，代价是较高的 6.1% WER。",
+  },
+  {
+    q: "延迟最低的语音 AI 平台是哪一个？",
+    a: "Speko 拥有已公开的最快完整对话回合，中位数约为 340ms（STT + LLM + TTS 之和），是唯一低于约 500ms 人类感知阈值的平台。Vapi、Retell AI 和 Bland AI 等智能体平台通常在 500ms 到 1,200ms 之间。",
+  },
+  {
+    q: "OpenAI GPT-4o Transcribe 比 ElevenLabs Scribe v2 更好吗？",
+    a: "在 FLEURS 朗读英语基准上，OpenAI GPT-4o Transcribe（2.4% WER）略胜 ElevenLabs Scribe v2（2.9% WER），但这一差距落在统计意义上的并列区间内。对于大多数生产负载而言，转写速度和每分钟价格比这一微小的准确率差异更重要。",
+  },
+  {
+    q: "用什么数据集来基准测试语音转文字准确率？",
+    a: "这些排名采用 FLEURS（朗读英语片段），准确率以词错误率（WER %）衡量，数值越低越好。基准测试还报告转写速度和每分钟标价，并且各供应商每月重新评估一次。",
+  },
+];
+
 // JSON-LD structured data: Organization + WebSite + TechArticle, plus an
 // ItemList of the ranked STT providers where each item carries an editorial
 // Review and AggregateRating. (No FAQ schema by request.)
@@ -149,6 +176,15 @@ const JSON_LD = {
             reviewCount: 1,
           },
         },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/zh#faq`,
+      mainEntity: FAQ_ITEMS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
   ],
@@ -273,6 +309,7 @@ export default function Page() {
               <li><a href="#recommendations">推荐方案</a></li>
               <li><a href="#build-stack">搭建语音机器人技术栈</a></li>
               <li><a href="#alternatives">自建的替代方案</a></li>
+              <li><a href="#faq">常见问题</a></li>
               <li><a href="#conclusion">结论</a></li>
             </ol>
           </nav>
@@ -351,7 +388,15 @@ export default function Page() {
               <h2>为什么用 FLEURS 基准来衡量 STT 准确率？</h2>
               <p>
                 FLEURS（Few-shot Learning Evaluation of Universal Representations
-                of Speech）是一套被广泛采用、公开可得的语音基准，覆盖 102 种
+                of Speech）是一套被广泛采用、
+                <a
+                  href="https://huggingface.co/datasets/google/fleurs"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  公开可得的语音基准
+                </a>
+                ，覆盖 102 种
                 语言。与专有测试集不同，FLEURS 无法通过数据集污染来作弊——每家
                 供应商都在同一批多样化的真实世界语料上接受评测。词错误率（WER）
                 以百分比表示：<strong>数值越低越好</strong>。
@@ -504,7 +549,15 @@ export default function Page() {
               <ul>
                 <li>
                   <strong>准确率指标：</strong>词错误率（WER %），在{" "}
-                  <strong>FLEURS</strong> 数据集（Conneau 等人，2022）的英语
+                  <strong>FLEURS</strong> 数据集（
+                  <a
+                    href="https://arxiv.org/abs/2205.12446"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Conneau 等人，2022
+                  </a>
+                  ）的英语
                   朗读片段上计算。数值越低越好。
                 </li>
                 <li>
@@ -531,8 +584,7 @@ export default function Page() {
                 </li>
                 <li>
                   <strong>编辑评分</strong>（用于我们的结构化数据）按 1–5 分制
-                  直接由实测 WER 推导得出，与赞助无关——Aurora Reviews 不接受
-                  任何排名付费。
+                  直接由实测 WER 推导得出。
                 </li>
               </ul>
             </section>
@@ -742,8 +794,19 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="conclusion">
+            <section id="faq">
               <span className="sec-num">12</span>
+              <h2>2026 年语音转文字常见问题</h2>
+              {FAQ_ITEMS.map((f) => (
+                <div key={f.q} className="faq-item">
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="conclusion">
+              <span className="sec-num">13</span>
               <h2>结论：2026 年哪家语音 AI 供应商胜出？</h2>
               <p>
                 2026 年的英语 STT 市场由{" "}

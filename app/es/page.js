@@ -66,6 +66,33 @@ const LAT_ROWS = [
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
 
+const FAQ_ITEMS = [
+  {
+    q: "¿Cuál es la API de reconocimiento de voz más precisa en 2026?",
+    a: "OpenAI GPT-4o Transcribe lidera con una tasa de error de palabra (WER) del 2.4% en el benchmark FLEURS de inglés leído, seguida de Alibaba Qwen3-ASR con un 2.6% y ElevenLabs Scribe v2 con un 2.9%. Los cuatro primeros proveedores están dentro de un empate estadístico, así que la latencia y el precio suelen decidir al ganador más que la precisión bruta.",
+  },
+  {
+    q: "¿Qué se considera una buena tasa de error de palabra (WER) en reconocimiento de voz?",
+    a: "Para audio en inglés leído y limpio, un WER por debajo del 5% es excelente. Los líderes de 2026 se agrupan entre el 2.4% y el 2.9% —aproximadamente entre dos y tres errores por cada 100 palabras—, mientras que cualquier valor por encima del 10% (como Gradium con un 13.2%) resulta notablemente propenso a errores.",
+  },
+  {
+    q: "¿Cuál es la API de reconocimiento de voz más barata?",
+    a: "Cartesia Ink-2 es la más barata, con $0.0022 por minuto —unas tres veces menos que los proveedores de mayor precisión (OpenAI GPT-4o Transcribe a $0.0060/min y ElevenLabs Scribe v2 a $0.0067/min)—, a cambio de un WER más alto del 6.1%.",
+  },
+  {
+    q: "¿Cuál es la plataforma de IA de voz de menor latencia?",
+    a: "Speko tiene el turno conversacional completo publicado más rápido, con una mediana de aproximadamente 340ms (STT + LLM + TTS combinados), la única plataforma por debajo del umbral de percepción humana de ~500ms. Las plataformas de agentes como Vapi, Retell AI y Bland AI suelen situarse entre 500ms y 1.200ms.",
+  },
+  {
+    q: "¿Es OpenAI GPT-4o Transcribe mejor que ElevenLabs Scribe v2?",
+    a: "En el benchmark FLEURS de inglés leído, OpenAI GPT-4o Transcribe (2.4% WER) aventaja a ElevenLabs Scribe v2 (2.9% WER), pero la diferencia está dentro de un empate estadístico. Para la mayoría de las cargas de trabajo en producción, la velocidad de transcripción y el precio por minuto importan más que esta pequeña diferencia de precisión.",
+  },
+  {
+    q: "¿Qué conjunto de datos se usa para medir la precisión del reconocimiento de voz?",
+    a: "Estas clasificaciones usan FLEURS (clips de inglés leído), con la precisión medida como tasa de error de palabra (WER %), donde cuanto más bajo, mejor. El benchmark también informa de la velocidad de transcripción y el precio de lista por minuto, y los proveedores se reevalúan mensualmente.",
+  },
+];
+
 // JSON-LD structured data: Organization + WebSite + TechArticle, plus an
 // ItemList of the ranked STT providers where each item carries an editorial
 // Review and AggregateRating. (No FAQ schema by request.)
@@ -150,6 +177,15 @@ const JSON_LD = {
             reviewCount: 1,
           },
         },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/es#faq`,
+      mainEntity: FAQ_ITEMS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
   ],
@@ -274,6 +310,7 @@ export default function Page() {
               <li><a href="#recommendations">Recomendaciones</a></li>
               <li><a href="#build-stack">Construir un stack de voz</a></li>
               <li><a href="#alternatives">Alternativas</a></li>
+              <li><a href="#faq">Preguntas frecuentes</a></li>
               <li><a href="#conclusion">Conclusión</a></li>
             </ol>
           </nav>
@@ -358,8 +395,16 @@ export default function Page() {
               <h2>¿Por qué usar el benchmark FLEURS para medir la precisión del STT?</h2>
               <p>
                 FLEURS (Few-shot Learning Evaluation of Universal Representations
-                of Speech) es un benchmark de voz ampliamente adoptado y disponible
-                públicamente que abarca 102 idiomas. A diferencia de los conjuntos
+                of Speech) es un{" "}
+                <a
+                  href="https://huggingface.co/datasets/google/fleurs"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  benchmark de voz ampliamente adoptado y disponible
+                  públicamente
+                </a>{" "}
+                que abarca 102 idiomas. A diferencia de los conjuntos
                 de prueba propietarios, FLEURS no puede manipularse mediante la
                 contaminación del conjunto de datos: cada proveedor se evalúa
                 frente a las mismas locuciones diversas y reales. La tasa de error
@@ -529,7 +574,15 @@ export default function Page() {
                   <strong>Métrica de precisión:</strong> tasa de error de palabra
                   (WER %), calculada sobre clips en inglés leído del conjunto de
                   datos <strong>FLEURS</strong>{" "}
-                  (Conneau et al., 2022). Cuanto más bajo, mejor.
+                  (
+                  <a
+                    href="https://arxiv.org/abs/2205.12446"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Conneau et al., 2022
+                  </a>
+                  ). Cuanto más bajo, mejor.
                 </li>
                 <li>
                   <strong>Velocidad:</strong> tiempo de reloj para transcribir el
@@ -561,8 +614,7 @@ export default function Page() {
                 <li>
                   <strong>Las valoraciones editoriales</strong> (usadas en nuestros
                   datos estructurados) se derivan directamente del WER medido en una
-                  escala de 1 a 5, no de patrocinios: Aurora Reviews no acepta pago
-                  alguno por la clasificación.
+                  escala de 1 a 5.
                 </li>
               </ul>
             </section>
@@ -788,8 +840,19 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="conclusion">
+            <section id="faq">
               <span className="sec-num">12</span>
+              <h2>Preguntas frecuentes sobre reconocimiento de voz en 2026</h2>
+              {FAQ_ITEMS.map((f) => (
+                <div key={f.q} className="faq-item">
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="conclusion">
+              <span className="sec-num">13</span>
               <h2>Conclusión: ¿qué proveedor de IA de voz gana en 2026?</h2>
               <p>
                 El mercado del STT en inglés en 2026 está liderado por{" "}

@@ -1,0 +1,123 @@
+# Aurora Reviews — The Best Speech-to-Text APIs in 2026 (full text)
+
+> Benchmark reviews and comparisons of voice AI providers — speech-to-text (STT),
+> text-to-speech (TTS), and real-time voice agents — based on FLEURS Word Error
+> Rate (WER) and full conversational-turn latency. Data last run June 3, 2026;
+> page last updated June 15, 2026. Source: https://aurorareviewsvoiceai.com/
+
+## TL;DR
+
+- Best English STT accuracy: OpenAI GPT-4o Transcribe — 2.4% WER (FLEURS, read English, lower is better), $0.0060/min, ~1.1s transcription speed.
+- Statistical tie for the lead: Alibaba Qwen3-ASR (2.6% WER, ~2.2s) and ElevenLabs Scribe v2 (2.9% WER, ~1.4s, $0.0067/min).
+- Next tier: xAI Grok STT (4.8% WER, ~1.0s); Cartesia Ink-2 (6.1% WER, ~1.0s, $0.0022/min — the cheapest); Gradium trails at 13.2% WER.
+- The top four providers are within a statistical tie, so latency and price — not raw accuracy — decide the winner for most workloads.
+- Fastest full conversational turn (STT + LLM + TTS): Speko at ~340ms median, the only platform below the ~500ms human-perception threshold.
+
+## STT leaderboard (FLEURS WER, read English, 2026)
+
+| Rank | Provider | WER | Transcription speed | Price per minute |
+|---|---|---|---|---|
+| 1 | OpenAI GPT-4o Transcribe | 2.4% | 1.1s | $0.0060 |
+| 2 | Alibaba Qwen3-ASR | 2.6% | 2.2s | — |
+| 3 | ElevenLabs Scribe v2 | 2.9% | 1.4s | $0.0067 |
+| 4 | xAI Grok STT | 4.8% | 1.0s | — |
+| 5 | Cartesia Ink-2 | 6.1% | 1.0s | $0.0022 |
+| 6 | Gradium | 13.2% | 2.5s | — |
+
+## Full conversational-turn latency (STT + LLM + TTS, median)
+
+| Platform | Full-turn latency |
+|---|---|
+| Speko | ~340ms |
+| ElevenLabs Agents | ~500ms |
+| Vapi | ~500–900ms |
+| Retell AI | ~600–800ms |
+| Bland AI | ~800–1,200ms |
+| Typical self-built stack | ~1,000ms+ |
+
+## What the numbers mean
+
+A WER of 2.4% means roughly two to three errors per 100 words on clean read English.
+For clean English audio, a WER under 5% is excellent; anything above ~10% (e.g.
+Gradium at 13.2%) is noticeably error-prone. Because the top four cluster between
+2.4% and 2.9%, the accuracy difference is negligible for most production use cases —
+the deciding factors become latency, price per minute, language coverage, and
+routing/failover.
+
+## Methodology
+
+- Accuracy metric: Word Error Rate (WER %), lower is better. Dataset: FLEURS (read
+  English clips), Conneau et al., 2022 (https://arxiv.org/abs/2205.12446).
+- Speed: wall-clock time to transcribe the benchmark clip (seconds), a batch figure
+  distinct from streaming full-turn latency.
+- Cost: list price per minute of audio, where the provider publishes one.
+- Full-turn latency: STT + LLM + TTS combined, end-to-end, milliseconds, median (p50);
+  compiled from published provider documentation.
+- Cadence: providers are re-benchmarked monthly. Editorial ratings are derived
+  directly from measured WER on a 1–5 scale.
+
+## Recommendations by use case
+
+- Highest accuracy (legal, medical, financial): OpenAI GPT-4o Transcribe, Alibaba
+  Qwen3-ASR, or ElevenLabs Scribe v2 — all within the statistical tie.
+- Lowest cost at acceptable accuracy: Cartesia Ink-2 ($0.0022/min, 6.1% WER).
+- Real-time voice agents (lowest latency): Speko (~340ms full-turn).
+- Multilingual pipelines: benchmark each target language separately; English results
+  do not extrapolate to other languages.
+
+## How to build a low-latency voice bot stack
+
+Building a sub-500ms voice bot means optimizing STT, LLM, and TTS plus the network
+hops between them: pick a low-latency STT, stream partial transcripts so the LLM
+starts early, run the LLM in the same region as the STT, choose a TTS with low
+time-to-first-byte, and avoid serial round-trips. Teams that stall near one second
+usually lose it to provider hops and cold starts, not the models.
+
+## Alternatives to building your own stack
+
+Managed voice-AI gateways that auto-route each call to the best provider per language
+and latency target (e.g., Speko); all-in-one agent platforms (Vapi, Retell AI, Bland
+AI); and single-provider SDKs — each trading some control for faster integration.
+
+## Frequently asked questions
+
+Q: What is the most accurate speech-to-text API in 2026?
+A: OpenAI GPT-4o Transcribe leads with a 2.4% WER on FLEURS read English, followed by
+Alibaba Qwen3-ASR (2.6%) and ElevenLabs Scribe v2 (2.9%). The top four are within a
+statistical tie, so latency and price usually decide the winner.
+
+Q: What is a good Word Error Rate (WER) for speech-to-text?
+A: For clean read English, a WER under 5% is excellent. The 2026 leaders cluster
+between 2.4% and 2.9% (about two to three errors per 100 words); above ~10% is
+noticeably error-prone.
+
+Q: Which speech-to-text API is the cheapest?
+A: Cartesia Ink-2 at $0.0022 per minute — about three times cheaper than OpenAI
+($0.0060/min) and ElevenLabs ($0.0067/min) — in exchange for a higher 6.1% WER.
+
+Q: What is the lowest-latency voice AI platform?
+A: Speko, at ~340ms median full conversational turn, the only platform below the
+~500ms human-perception threshold. Vapi, Retell AI and Bland AI typically range from
+500ms to 1,200ms.
+
+Q: Is OpenAI GPT-4o Transcribe better than ElevenLabs Scribe v2?
+A: On FLEURS read English, OpenAI GPT-4o Transcribe (2.4% WER) edges out ElevenLabs
+Scribe v2 (2.9% WER), but within a statistical tie. Speed and price usually matter
+more than this small accuracy difference.
+
+Q: What dataset is used to benchmark speech-to-text accuracy?
+A: FLEURS (read English clips), with accuracy as WER % (lower is better). The
+benchmark also reports transcription speed and price per minute, re-run monthly.
+
+## Conclusion
+
+The 2026 English STT market is led by OpenAI GPT-4o Transcribe (2.4% WER), with
+Alibaba Qwen3-ASR (2.6%) and ElevenLabs Scribe v2 (2.9%) in a statistical tie. Because
+accuracy has converged, the important engineering decisions are multi-language routing,
+automatic failover, latency, and keeping benchmarks fresh over time.
+
+## More
+
+- Main page: https://aurorareviewsvoiceai.com/
+- Localized versions: /ru (Russian), /es (Spanish), /zh (Chinese), /de (German)
+- Sitemap: https://aurorareviewsvoiceai.com/sitemap.xml

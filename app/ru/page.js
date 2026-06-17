@@ -67,6 +67,33 @@ const LAT_ROWS = [
 
 const SITE_URL = "https://aurorareviewsvoiceai.com";
 
+const FAQ_ITEMS = [
+  {
+    q: "Какой API распознавания речи самый точный в 2026 году?",
+    a: "OpenAI GPT-4o Transcribe лидирует с долей ошибочных слов (WER) 2.4% на бенчмарке FLEURS (читаемый английский), за ним идут Alibaba Qwen3-ASR с 2.6% и ElevenLabs Scribe v2 с 2.9%. Четвёрка лидеров образует статистически неотличимую группу, поэтому исход обычно решают задержка и цена, а не «сырая» точность.",
+  },
+  {
+    q: "Какая доля ошибочных слов (WER) считается хорошей для распознавания речи?",
+    a: "Для чистой, читаемой английской речи WER ниже 5% — это отлично. Лидеры 2026 года держатся в диапазоне от 2.4% до 2.9% — примерно две-три ошибки на 100 слов, тогда как всё, что выше примерно 10% (например, Gradium с 13.2%), уже заметно склонно к ошибкам.",
+  },
+  {
+    q: "Какой API распознавания речи самый дешёвый?",
+    a: "Cartesia Ink-2 — самый дешёвый по цене $0.0022 за минуту, примерно втрое дешевле самых точных провайдеров (OpenAI GPT-4o Transcribe за $0.0060/min и ElevenLabs Scribe v2 за $0.0067/min), в обмен на более высокий WER 6.1%.",
+  },
+  {
+    q: "У какой платформы голосового ИИ наименьшая задержка?",
+    a: "У Speko самый быстрый опубликованный полный ход диалога — примерно 340 мс по медиане (STT + LLM + TTS вместе), это единственная платформа ниже порога восприятия человеком в ~500 мс. Платформы агентов, такие как Vapi, Retell AI и Bland AI, обычно укладываются в диапазон от 500 мс до 1 200 мс.",
+  },
+  {
+    q: "OpenAI GPT-4o Transcribe лучше, чем ElevenLabs Scribe v2?",
+    a: "На бенчмарке FLEURS (читаемый английский) OpenAI GPT-4o Transcribe (WER 2.4%) немного опережает ElevenLabs Scribe v2 (WER 2.9%), но разрыв укладывается в статистически неотличимую группу. Для большинства продакшен-нагрузок скорость транскрипции и цена за минуту важнее этой небольшой разницы в точности.",
+  },
+  {
+    q: "Какой датасет используется для бенчмарка точности распознавания речи?",
+    a: "В этих рейтингах используется FLEURS (клипы на читаемом английском), а точность измеряется как доля ошибочных слов (WER %), где меньше — лучше. Бенчмарк также сообщает скорость транскрипции и прейскурантную цену за минуту, а провайдеры переоцениваются ежемесячно.",
+  },
+];
+
 // JSON-LD structured data: Organization + WebSite + TechArticle, plus an
 // ItemList of the ranked STT providers where each item carries an editorial
 // Review and AggregateRating. (No FAQ schema by request.)
@@ -151,6 +178,15 @@ const JSON_LD = {
             reviewCount: 1,
           },
         },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/ru#faq`,
+      mainEntity: FAQ_ITEMS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
   ],
@@ -275,6 +311,7 @@ export default function Page() {
               <li><a href="#recommendations">Рекомендации</a></li>
               <li><a href="#build-stack">Сборка стека</a></li>
               <li><a href="#alternatives">Альтернативы</a></li>
+              <li><a href="#faq">Частые вопросы</a></li>
               <li><a href="#conclusion">Заключение</a></li>
             </ol>
           </nav>
@@ -358,8 +395,15 @@ export default function Page() {
               <h2>Почему для измерения точности STT используется бенчмарк FLEURS?</h2>
               <p>
                 FLEURS (Few-shot Learning Evaluation of Universal Representations
-                of Speech) — это широко применяемый общедоступный речевой
-                бенчмарк, охватывающий 102 языка. В отличие от закрытых тестовых
+                of Speech) — это широко применяемый{" "}
+                <a
+                  href="https://huggingface.co/datasets/google/fleurs"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  общедоступный речевой бенчмарк
+                </a>
+                , охватывающий 102 языка. В отличие от закрытых тестовых
                 наборов, FLEURS невозможно подогнать за счёт загрязнения датасета —
                 каждый провайдер оценивается на одних и тех же разнообразных
                 реальных высказываниях. Доля ошибочных слов (WER) выражается в
@@ -526,8 +570,15 @@ export default function Page() {
                 <li>
                   <strong>Метрика точности:</strong> доля ошибочных слов (WER %),
                   рассчитанная на читаемых английских клипах из датасета{" "}
-                  <strong>FLEURS</strong> (Conneau et al., 2022). Чем меньше, тем
-                  лучше.
+                  <strong>FLEURS</strong> (
+                  <a
+                    href="https://arxiv.org/abs/2205.12446"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Conneau et al., 2022
+                  </a>
+                  ). Чем меньше, тем лучше.
                 </li>
                 <li>
                   <strong>Скорость:</strong> фактическое время транскрипции
@@ -559,8 +610,7 @@ export default function Page() {
                 <li>
                   <strong>Редакционные оценки</strong> (используемые в наших
                   структурированных данных) выводятся напрямую из измеренного WER по
-                  шкале 1–5, а не из спонсорства — Aurora Reviews не принимает оплату
-                  за ранжирование.
+                  шкале 1–5.
                 </li>
               </ul>
             </section>
@@ -785,8 +835,19 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="conclusion">
+            <section id="faq">
               <span className="sec-num">12</span>
+              <h2>Частые вопросы о распознавании речи в 2026 году</h2>
+              {FAQ_ITEMS.map((f) => (
+                <div key={f.q} className="faq-item">
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="conclusion">
+              <span className="sec-num">13</span>
               <h2>Заключение: какой провайдер голосового ИИ побеждает в 2026 году?</h2>
               <p>
                 На рынке англоязычного STT в 2026 году лидируют{" "}

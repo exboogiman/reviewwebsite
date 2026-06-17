@@ -22,4 +22,5 @@
 
 ## More
 
+- Full text for AI ingestion: https://aurorareviewsvoiceai.com/llms-full.txt
 - Sitemap: https://aurorareviewsvoiceai.com/sitemap.xml
